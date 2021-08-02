@@ -1,7 +1,7 @@
 package com.java8;
 
 import com.alibaba.fastjson.JSON;
-import com.java8.model.Student;
+import com.model.Student;
 import org.junit.Test;
 
 import java.util.*;

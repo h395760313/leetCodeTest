@@ -1,9 +1,7 @@
 package com.java8;
 
-import com.structure.ArrayList;
 import org.junit.Test;
 
-import java.lang.management.MemoryType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -33,7 +31,7 @@ public class Reflect {
     @Test
     public void testReflect2() throws Exception {
         // 获取类
-        Class<?> c = Class.forName("com.java8.model.User");
+        Class<?> c = Class.forName("com.model.User");
         // 获取id属性
         Field id = c.getDeclaredField("id");
         // 实例化
@@ -47,7 +45,7 @@ public class Reflect {
     @Test
     public void testReflect3() throws Exception {
         // 获取类
-        Class<?> c = Class.forName("com.java8.model.User");
+        Class<?> c = Class.forName("com.model.User");
         // 获取id属性
         Method[] methods = c.getMethods();
         StringBuffer sb = new StringBuffer();
