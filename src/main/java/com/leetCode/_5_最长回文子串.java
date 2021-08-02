@@ -13,7 +13,7 @@ public class _5_最长回文子串 {
 
     public String longestPalindrome(String s) {
 
-        return null;
+        return "null";
     }
 
     @Test
