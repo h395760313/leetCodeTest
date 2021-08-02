@@ -2,7 +2,7 @@ package com.structure;
 
 import java.util.StringJoiner;
 
-public class LinkedList<E> extends AbstractList<E> implements List<E>{
+public class SingleLinkedList<E> extends AbstractList<E> implements List<E>{
 
     private Node first;
 

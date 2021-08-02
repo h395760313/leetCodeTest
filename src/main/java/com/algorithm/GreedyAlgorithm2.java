@@ -1,5 +1,7 @@
 package com.algorithm;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * 贪心算法
  */
-public class GreedyAlgorithm {
+public class GreedyAlgorithm2 {
 
     /** 假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。
      * 对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] >= g[i]，
@@ -22,6 +24,14 @@ public class GreedyAlgorithm {
      * 你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。
      * 虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。
      * 所以你应该输出1。
+     *  示例 2:
+     * 输入: g = [1,2], s = [1,2,3]
+     * 输出: 2
+     * 解释:
+     * 你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。
+     * 你拥有的饼干数量和尺寸都足以让所有孩子满足。
+     * 所以你应该输出2.
+     *  Related Topics 贪心 数组 排序
      * @param g 孩子列表
      * @param s 饼干列表
      * @return
@@ -29,9 +39,8 @@ public class GreedyAlgorithm {
     public int findContentChildren(int[] g, int[] s) {
         Arrays.sort(g);
         Arrays.sort(s);
-        int child = 0;
-        int cookie = 0;
-        while (child < g.length && cookie < s.length) {
+        int child = 0, cookie = 0;
+        while (child < g.length && cookie < s.length){
             if (g[child] <= s[cookie]) child++;
             cookie++;
         }
@@ -54,19 +63,18 @@ public class GreedyAlgorithm {
      */
     public int candy(int[] ratings) {
         int len = ratings.length;
-        if (len < 2) return len;
         int[] candy = new int[len];
-        for (int i = 1; i < len; i++) {
-            if (ratings[i] > ratings[i-1]) candy[i] = candy[i-1] + 1;
+        for (int i = 0; i < ratings.length - 1; i++) {
+            if (ratings[i] < ratings[i+1] && candy[i] >= candy[i+1]) candy[i+1] = candy[i] + 1;
         }
-        for (int i = len -1; i > 0; i--) {
-            if (ratings[i] < ratings[i-1]) candy[i-1] = Math.max(candy[i] + 1,candy[i-1]);
+        for (int i = ratings.length - 1; i > 0; i--) {
+            if (ratings[i] < ratings[i-1] && candy[i] >= candy[i-1]) candy[i-1] = candy[i] + 1;
         }
-        int count = len;
+        int res = len;
         for (int i = 0; i < candy.length; i++) {
-            count += candy[i];
+            res += candy[i];
         }
-        return count;
+        return res;
     }
 
 
@@ -89,17 +97,17 @@ public class GreedyAlgorithm {
      */
     public int eraseOverlapIntervals(int[][] intervals) {
         int len = intervals.length;
-        if (len == 0) return 0;
-        int min = intervals[0][1];
+        if (len == 1) return 0;
+
+        Arrays.sort(intervals,Comparator.comparingInt(e->e[1]));
+        int start = 0;
         int res = 0;
-        Arrays.sort(intervals, Comparator.comparingInt(a->a[0]));
         for (int i = 1; i < len; i++) {
-            if (min > intervals[i][0]){
-                res ++;
-                min = Math.min(min,intervals[i][1]);
-            }else {
-                min = intervals[i][1];
+            if (intervals[start][1] > intervals[i][0]){
+                res++;
+                continue;
             }
+            start = i;
         }
         return res;
     }
@@ -117,29 +125,8 @@ public class GreedyAlgorithm {
      * @return
      */
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
-        int len = flowerbed.length;
-        int res = 0;
-        if (len == 1){
-            if (flowerbed[0] == 0){
-                res++;
-            }
-            return res == n;
-        }
-        if (flowerbed[0] == 0 && flowerbed[1] == 0){
-            flowerbed[0] = 1;
-            res ++;
-        }
-        for (int i = 1; i < len-1; i++) {
-            if (flowerbed[i-1] == 0 && flowerbed[i+1] == 0 && flowerbed[i] == 0){
-                flowerbed[i] = 1;
-                res++;
-            }
-        }
-        if (flowerbed[len-1] == 0 && flowerbed[len-2] == 0){
-            flowerbed[len-1] = 1;
-            res ++;
-        }
-        return res == n;
+
+        return false;
     }
 
     /**
@@ -164,22 +151,8 @@ public class GreedyAlgorithm {
      * @return
      */
     public int findMinArrowShots(int[][] points) {
-        int len = points.length;
-        if (len <=1){
-            return len;
-        }
-        // {{3,9},{7,12},{3,8},{6,8},{9,10},{2,9},{0,9},{3,9},{0,6},{2,8}}
-        Arrays.sort(points,Comparator.comparingInt(a->a[1]));
-        // {{0,6},{2,8},{3,8},{6,8},{0,9},{2,9},{3,9},{3,9},{9,10},{7,12}}
-        int cur = points[len-1][0];
-        int res = 1;
-        for (int i = len - 1; i >= 0; i--) {
-            if (cur > points[i][1]){
-                cur = points[i][1];
-                res ++;
-            }
-        }
-        return res;
+
+        return 0;
     }
 
     /**
@@ -202,39 +175,8 @@ public class GreedyAlgorithm {
      * @return
      */
     public List<Integer> partitionLabels(String S) {
-        /*List<Integer> list = new ArrayList<>();
-        char[] arr = S.toCharArray();
-        int first = 0;
-        int last = S.lastIndexOf(arr[0]);
-        for (int i = 0; i < S.length(); i++) {
-            if (i == last){
-                list.add(last - first + 1);
-                if (i == S.length()-1){
-                    break;
-                }
-                first = i+1;
-                last = S.lastIndexOf(arr[i+1]);
-            }
-            if (S.lastIndexOf(arr[i]) > last){
-                last = S.lastIndexOf(arr[i]);
-            }
-        }
-        return list;*/
-        int[] arr = new int[26];
-        int len = S.length();
-        for (int i = 0; i < len; i++) {
-            arr[S.charAt(i) - 'a'] = i;
-        }
-        List<Integer> list = new ArrayList<>();
-        int start = 0,end = 0;
-        for (int i = 0; i < len; i++) {
-            end = Math.max(end,arr[S.charAt(i) - 'a']);
-            if (end == i){
-                list.add(end - start + 1);
-                start = end + 1;
-            }
-        }
-        return list;
+
+        return null;
     }
 
     /**
@@ -269,25 +211,8 @@ public class GreedyAlgorithm {
      * @return
      */
     public int maxProfit(int[] prices) {
-        int money = 0;
-        boolean flag = false;
-        for (int i = 0; i < prices.length-1; i++) {
-            if (!flag){
-                if (prices[i+1] > prices[i] ){
-                    money -= prices[i];
-                    flag = true;
-                }
-            }else {
-                if (prices[i+1] < prices[i] ){
-                    money += prices[i];
-                    flag = false;
-                }
-            }
-        }
-        if (flag){
-            money += prices[prices.length-1];
-        }
-        return money;
+
+        return 0;
     }
 
     /**
@@ -326,25 +251,7 @@ public class GreedyAlgorithm {
      */
     // todo 待完成
     public int[][] reconstructQueue(int[][] people) {
-        Arrays.sort(people,Comparator.comparingInt(a->a[1]));
-        for (int i = 0; i < people.length-1; i++) {
-            if (people[i][1] == people[i+1][1]){
-                if (people[i][0] > people[i+1][0]){
-                    int[] temp;
-                    temp = people[i];
-                    people[i] = people[i + 1];
-                    people[i + 1] = temp;
-                }
-            }
-        }
 
-        
-        for (int[] person : people) {
-            for (int i : person) {
-                System.out.print(i+"\t");
-            }
-            System.out.println();
-        }
         return null;
     }
 
@@ -372,28 +279,6 @@ public class GreedyAlgorithm {
      */
     // todo 待完成
     public boolean checkPossibility(int[] nums) {
-        int count = 0;
-        int[] clone = nums.clone();
-        boolean flag = true;
-        for (int i = 0; i < nums.length - 1; i++) {
-            if (nums[i] > nums[i + 1]) {
-                nums[i] = nums[i + 1];
-            }
-            for (int j = 0; j < nums.length - 1; j++) {
-                if (nums[j] > nums[j + 1]) {
-                    flag = false;
-                }
-            }
-            if (clone[i] > clone[i + 1]) {
-                clone[i + 1] = clone[i];
-            }
-            for (int j = 0; j < clone.length - 1; j++) {
-                if (clone[j] > clone[j + 1]) {
-                    flag = false;
-                }
-            }
-        }
-
-        return flag;
+        return false;
     }
 }

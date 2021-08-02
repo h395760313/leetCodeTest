@@ -2,7 +2,7 @@ package com.structure;
 
 import java.util.StringJoiner;
 
-public class SingleLinkedList<E> extends AbstractList<E> implements List<E>{
+public class SingleCircleLinkedList<E> extends AbstractList<E> implements List<E>{
 
     private Node first;
 
@@ -14,6 +14,7 @@ public class SingleLinkedList<E> extends AbstractList<E> implements List<E>{
             this.element = element;
             this.next = next;
         }
+
     }
 
     @Override
@@ -38,9 +39,12 @@ public class SingleLinkedList<E> extends AbstractList<E> implements List<E>{
 
     @Override
     public void add(int index, E element) {
-        rangeCheckForAdd(index);
+        rangeCheck(index);
         if (index == 0) {
-            first = new Node<>(element,first);
+            Node<E> newFirst = new Node<>(element, first);
+            Node<E> last = size == 0 ? newFirst : node(size - 1);
+            first = newFirst;
+            last.next = first;
         }else {
             Node<E> prev = node(index - 1);
             prev.next = new Node<>(element,prev.next);
@@ -66,7 +70,9 @@ public class SingleLinkedList<E> extends AbstractList<E> implements List<E>{
         rangeCheck(index);
         Node<E> node = first;
         if (index == 0) {
-            first = first.next;
+            Node<E> last = node(size - 1);
+            first = size == 1 ? null : first.next;
+            last.next = first;
         }else {
             Node<E> prev = node(index - 1);
             node = prev.next;
@@ -104,7 +110,7 @@ public class SingleLinkedList<E> extends AbstractList<E> implements List<E>{
         StringJoiner sj = new StringJoiner(",","[","]");
         Node<E> node = first;
         for (int i = 0; i < size; i++) {
-            sj.add(String.valueOf(node.element));
+            sj.add(node.element +"_" +node.next.element);
             node = node.next;
         }
         return sj.toString();

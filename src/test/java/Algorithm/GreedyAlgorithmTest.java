@@ -1,20 +1,22 @@
 package Algorithm;
 
 import com.algorithm.GreedyAlgorithm;
+import com.algorithm.GreedyAlgorithm2;
 import org.junit.Test;
 
 
 public class GreedyAlgorithmTest {
 
     GreedyAlgorithm greedyAlgorithm = new GreedyAlgorithm();
+    GreedyAlgorithm2 greedyAlgorithm2 = new GreedyAlgorithm2();
 
     /**
      * 455.分发饼干(Assign Cookies)
      */
     @Test
     public void findContentChildrenTest(){
-        int[] g = {1,2,3} ,s = {1,1};
-        System.out.println(greedyAlgorithm.findContentChildren(g,s));
+        int[] g = {1,2} ,s = {1,2,3};
+        System.out.println(greedyAlgorithm2.findContentChildren(g,s));
     }
 
     /**
@@ -23,7 +25,7 @@ public class GreedyAlgorithmTest {
     @Test
     public void candyTest(){
         int[] g = {1,3,4,5,2};
-        System.out.println(greedyAlgorithm.candy(g));
+        System.out.println(greedyAlgorithm2.candy(g));
     }
 
     /**
@@ -31,8 +33,8 @@ public class GreedyAlgorithmTest {
      */
     @Test
     public void eraseOverlapIntervalsTest(){
-        int[][] g = {{1,2},{1,3},{1,4},{1,5}};
-        System.out.println(greedyAlgorithm.eraseOverlapIntervals(g));
+        int[][] g = {{1, 2}, {2, 3}, {3, 4}, {1, 3}};
+        System.out.println(greedyAlgorithm2.eraseOverlapIntervals(g));
     }
 
     /**

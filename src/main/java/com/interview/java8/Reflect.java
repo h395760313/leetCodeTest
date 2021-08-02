@@ -1,4 +1,4 @@
-package com.java8;
+package com.interview.java8;
 
 import org.junit.Test;
 

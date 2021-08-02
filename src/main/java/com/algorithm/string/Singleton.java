@@ -1,4 +1,4 @@
-package com.string;
+package com.algorithm.string;
 
 import java.util.HashSet;
 

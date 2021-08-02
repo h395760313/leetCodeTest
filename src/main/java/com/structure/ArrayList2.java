@@ -3,18 +3,23 @@ package com.structure;
 
 import java.util.StringJoiner;
 
-public class ArrayList<E> extends AbstractList<E> implements List<E>{
+/**
+ * 缩容
+ * @param <E>
+ */
+public class ArrayList2<E> extends AbstractList<E> implements List<E>{
 
     // 所有的元素
     private E[] elements;
+    protected static final int DEFAULT_CAPACITY = 10;
 
 
 
-    public ArrayList(){
+    public ArrayList2(){
         this(DEFAULT_CAPACITY);
     }
 
-    public ArrayList(int capaticy){
+    public ArrayList2(int capaticy){
         capaticy = capaticy < DEFAULT_CAPACITY ? DEFAULT_CAPACITY : capaticy;
         elements = (E[]) new Object[capaticy];
     }
@@ -43,23 +48,6 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>{
         }
         size++;
         elements[index] = element;
-    }
-
-
-
-    private void ensureCapacity(int capacity) {
-        int oldCapacity = elements.length;
-
-        if (oldCapacity > capacity) return;
-
-        // 新容量为旧容量的1.5倍
-        int newCapacity = oldCapacity + (oldCapacity >> 1);
-        E[] newElements = (E[]) new Object[newCapacity];
-        for (int i = 0; i < oldCapacity; i++) {
-            newElements[i] = elements[i];
-        }
-        elements = newElements;
-        System.out.println(oldCapacity + "扩容为" + newCapacity);
     }
 
     /**
@@ -107,6 +95,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>{
             elements[index] = elements[index + 1];
         }
         elements[--size] = null;
+        trim();
         return old;
     }
 
@@ -136,6 +125,34 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>{
     public void clear(){
         size = 0;
     }
+
+    private void ensureCapacity(int capacity) {
+        int oldCapacity = elements.length;
+
+        if (oldCapacity > capacity) return;
+
+        // 新容量为旧容量的1.5倍
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        E[] newElements = (E[]) new Object[newCapacity];
+        for (int i = 0; i < oldCapacity; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
+        System.out.println(oldCapacity + "扩容为" + newCapacity);
+    }
+
+    private void trim() {
+        int oldCapacity = elements.length;
+        int newCapacity = oldCapacity >> 1;
+        if (size >= newCapacity || newCapacity < DEFAULT_CAPACITY) return;
+
+        // 新容量为旧容量的1/2
+        E[] newElements = (E[]) new Object[newCapacity];
+        System.arraycopy(elements,0,newElements,0,size);
+        elements = newElements;
+        System.out.println(oldCapacity + "缩容为" + newCapacity);
+    }
+
 
     /**
      * 打印所有元素

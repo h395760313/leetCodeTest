@@ -1,4 +1,4 @@
-package com.java8;
+package com.interview.java8;
 
 import com.alibaba.fastjson.JSON;
 import com.model.Student;

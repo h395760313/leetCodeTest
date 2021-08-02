@@ -1,20 +1,13 @@
 package com.structure;
 
 
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.StringJoiner;
 
-public class ArrayList<E> {
+public class ArrayList<E> extends AbstractList<E> implements List<E>{
 
-    // 元素的数量
-    private int size;
     // 所有的元素
     private E[] elements;
-
-    private static final int DEFAULT_CAPACITY = 10;
-    private static final int ELEMENT_NOT_FOUND = -1;
-
+    protected static final int DEFAULT_CAPACITY = 10;
 
     public ArrayList(){
         this(DEFAULT_CAPACITY);
@@ -26,34 +19,10 @@ public class ArrayList<E> {
     }
 
     /**
-     * 元素的数量
-     * @return
-     */
-    public int size(){
-        return size;
-    }
-
-    /**
-     * 是否为空
-     * @return
-     */
-    public boolean isEmpty(){
-        return size == 0;
-    }
-
-    /**
-     * 是否包含某个元素
-     * @param element
-     * @return
-     */
-    public boolean contains(E element){
-        return indexOf(element) != -1;
-    }
-
-    /**
      * 添加元素到最后面
      * @param element
      */
+    @Override
     public void add(E element){
         ensureCapacity(size + 1);
         elements[size++] = element;
@@ -64,18 +33,18 @@ public class ArrayList<E> {
      * @param index
      * @param element
      */
+    @Override
     public void add(int index, E element){
-        if (index < 0 || index >= size){
-            throw new IndexOutOfBoundsException("Index :"+ index + ", Size: "+ size);
-        }
+        rangeCheckForAdd(index);
         ensureCapacity(size + 1);
         for (int i = size ; i > index; i--) {
             elements[i] = elements[i - 1];
         }
         size++;
         elements[index] = element;
-
     }
+
+
 
     private void ensureCapacity(int capacity) {
         int oldCapacity = elements.length;
@@ -85,9 +54,7 @@ public class ArrayList<E> {
         // 新容量为旧容量的1.5倍
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         E[] newElements = (E[]) new Object[newCapacity];
-        for (int i = 0; i < oldCapacity; i++) {
-            newElements[i] = elements[i];
-        }
+        System.arraycopy(elements,0,newElements,0,size);
         elements = newElements;
         System.out.println(oldCapacity + "扩容为" + newCapacity);
     }
@@ -97,6 +64,7 @@ public class ArrayList<E> {
      * @param index
      * @return index位置对应的元素
      */
+    @Override
     public E get(int index){
         if (index < 0 || index >= size){
             throw new IndexOutOfBoundsException("Index :"+ index + ", Size: "+ size);
@@ -110,6 +78,7 @@ public class ArrayList<E> {
      * @param element
      * @return 原来的元素
      */
+    @Override
     public E set(int index, E element){
         if (index < 0 || index >= size){
             throw new IndexOutOfBoundsException("Index :"+ index + ", Size: "+ size);
@@ -125,6 +94,7 @@ public class ArrayList<E> {
      * 删除index位置对应的元素
      * @return
      */
+    @Override
     public E remove(int index){
         if (index < 0 || index >= size){
             throw new IndexOutOfBoundsException("Index :"+ index + ", Size: "+ size);
@@ -133,7 +103,7 @@ public class ArrayList<E> {
         for (int i = index; i < size - 1; i++) {
             elements[index] = elements[index + 1];
         }
-        size--;
+        elements[--size] = null;
         return old;
     }
 
@@ -142,9 +112,16 @@ public class ArrayList<E> {
      * @param element
      * @return
      */
+    @Override
     public int indexOf(E element){
-        for (int i = 0; i < size; i++) {
-            if (elements[i].equals(element)) return i;
+        if (element == null) {
+            for (int i = 0; i < size; i++) {
+                if (elements[i] == null) return i;
+            }
+        }else {
+            for (int i = 0; i < size; i++) {
+                if (element.equals(elements[i])) return i;
+            }
         }
         return ELEMENT_NOT_FOUND;
     }
@@ -152,6 +129,7 @@ public class ArrayList<E> {
     /**
      * 清除所有元素
      */
+    @Override
     public void clear(){
         size = 0;
     }

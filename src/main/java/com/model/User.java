@@ -1,4 +1,4 @@
-package com.java8.model;
+package com.model;
 
 
 public class User {
@@ -12,6 +12,7 @@ public class User {
 
     public User() {
     }
+
 
     public int getAge() {
         return age;
@@ -27,5 +28,13 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", age=" + age +
+                '}';
     }
 }

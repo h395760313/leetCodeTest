@@ -1,4 +1,4 @@
-package com.java8.model;
+package com.model;
 
 import java.util.Objects;
 

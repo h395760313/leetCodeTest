@@ -1,10 +1,8 @@
 package com.structure;
 
-import com.alibaba.fastjson.JSON;
-
 import java.util.StringJoiner;
 
-public class LinkedList<E> extends AbstractList<E> implements List<E> {
+public class CircleLinkedList<E> extends AbstractList<E> implements List<E> {
 
     private Node<E> first;
     private Node<E> last;
@@ -46,22 +44,25 @@ public class LinkedList<E> extends AbstractList<E> implements List<E> {
         rangeCheck(index);
         if (index == size) { // 往最后添加元素
             Node<E> oldLast = last;
-            last = new Node<>(element, oldLast, null);
+            last = new Node<>(element, oldLast, first);
             if (oldLast == null) {
                 first = last;
+                first.next = first;
+                first.prev = first;
             }else {
                 oldLast.next = last;
+                first.prev = last;
             }
         }else {
             Node<E> next = node(index);
             Node<E> prev = next.prev;
             Node<E> node = new Node<>(element,prev,next);
-            if (prev != null){
-                prev.next = node;
-            } else {
+            prev.next = node;
+            next.prev = node;
+
+            if (node == first){ // index == 0
                 first = node;
             }
-            next.prev = node;
         }
         size++;
     }
@@ -83,21 +84,23 @@ public class LinkedList<E> extends AbstractList<E> implements List<E> {
     public E remove(int index) {
         rangeCheck(index);
 
-        Node<E> node = node(index);
-        Node<E> prev = node.prev;
-        if (index != 0 ) {
-            Node<E> prevsprev = node.prev.prev;
-        }
-        Node<E> next = node.next;
-        if (prev == null) {
-            first = next;
+        Node<E> node = first;
+        if (size == 1) {
+            first = null;
+            last = null;
         }else {
+            node = node(index);
+            Node<E> prev = node.prev;
+            Node<E> next = node.next;
             prev.next = next;
-        }
-        if (next == null) {
-            last = prev;
-        } else {
             next.prev = prev;
+
+            if (node == first) { // index == 0
+                first = next;
+            }
+            if (node == last) { // index == size - 1
+                last = prev;
+            }
         }
 
         size--;
@@ -133,7 +136,7 @@ public class LinkedList<E> extends AbstractList<E> implements List<E> {
         StringJoiner sj = new StringJoiner(",", "[", "]");
         Node<E> node = first;
         for (int i = 0; i < size; i++) {
-            sj.add(String.valueOf(node.element));
+            sj.add(node.prev.element + "_" +node.element + "_" +node.next.element);
             node = node.next;
         }
         return sj.toString();

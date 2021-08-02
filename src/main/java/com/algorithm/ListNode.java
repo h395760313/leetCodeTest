@@ -1,5 +1,6 @@
 package com.algorithm;
 
+
 public class ListNode {
 
     public int val;
@@ -13,4 +14,8 @@ public class ListNode {
     public ListNode() {
     }
 
+    @Override
+    public String toString() {
+        return "{" +val + ", " + next +'}';
+    }
 }
