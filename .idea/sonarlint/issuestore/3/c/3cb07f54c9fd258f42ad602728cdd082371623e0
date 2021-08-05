@@ -1,0 +1,15 @@
+
+`	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.( À‹àÿÿÿÿÿ
+`	java:S112."FDefine and throw a dedicated exception instead of using a generic one.(Ğ¿´«ûÿÿÿÿ
+u
+java:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(í…Ò‰
+u
+java:S11493"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(í…Ò‰
+N	java:S106"9Replace this use of System.out or System.err by a logger.(èÑ©‰
+S	java:S106"9Replace this use of System.out or System.err by a logger.(­ËÖşÿÿÿÿ
+G
+java:S3011(",This accessibility update should be removed.(ˆ­†ÿÿÿÿÿ
+G
+java:S3011)",This accessibility bypass should be removed.(ÈÔÄóøÿÿÿÿ
+N	java:S106*"9Replace this use of System.out or System.err by a logger.(è„ôÚ
+S	java:S106H"9Replace this use of System.out or System.err by a logger.(­ËÖşÿÿÿÿ

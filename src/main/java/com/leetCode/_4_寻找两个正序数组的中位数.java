@@ -4,6 +4,9 @@ package com.leetCode;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 /**
  *
  * @Author: xiehongyu
@@ -14,10 +17,7 @@ public class _4_寻找两个正序数组的中位数 {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int len = nums1.length + nums2.length;
         int[] newArr = new int[len];
-        int p = 0;
-        int q = 0;
-        int index = 0;
-        while (p < nums1.length || q < nums2.length) {
+        /*while (p < nums1.length || q < nums2.length) {
             if (p < nums1.length && (q >= nums2.length || nums1[p] < nums2[q])) {
                 newArr[index] = nums1[p];
                 p++;
@@ -26,17 +26,16 @@ public class _4_寻找两个正序数组的中位数 {
                 q++;
             }
             index++;
-        }
-        if (len % 2 == 0) {
-            System.out.println((double) 5/2);
-            return (double) (newArr[len / 2] + newArr[len / 2 - 1]) /2;
-        }else {
-            return newArr[len / 2];
-        }
+        }*/
+        System.arraycopy(nums1,0,newArr,0, nums1.length);
+        System.arraycopy(nums2,0,newArr,nums1.length, nums2.length);
+        Arrays.sort(newArr);
+        System.out.println(JSON.toJSONString(newArr));
+        return len % 2 == 0 ? (double) (newArr[len / 2] + newArr[len / 2 - 1]) /2 : newArr[len / 2];
     }
 
     @Test
     public void test() {
-        System.out.println(JSON.toJSONString(findMedianSortedArrays(new int[]{2},new int[]{})));
+        System.out.println(JSON.toJSONString(findMedianSortedArrays(new int[]{1,3},new int[]{2})));
     }
 }

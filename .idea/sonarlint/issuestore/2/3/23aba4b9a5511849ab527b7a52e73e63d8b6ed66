@@ -1,0 +1,13 @@
+
+G
+java:S3599",Use another way to initialize this instance.(”ã±¡ÿÿÿÿÿ
+t
+java:S1171"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
+G
+java:S3599",Use another way to initialize this instance.(ÌË“Àùÿÿÿÿ
+t
+java:S1171"YMove the contents of this initializer to a standard constructor or to field initializers.(ÒÌâ–øÿÿÿÿ
+N	java:S106^"9Replace this use of System.out or System.err by a logger.(Êª²®
+V	java:S1258"<This block of commented-out lines of code should be removed.( œÑúşÿÿÿÿ
+n
+java:S1192"SDefine a constant instead of duplicating this literal "åä¸­ç§‘æŠ€å¤§å­¦" 3 times.(®áƒğıÿÿÿÿ
