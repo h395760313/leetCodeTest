@@ -1,6 +1,9 @@
-package com.structure;
+package com.structure.a_动态数组;
 
-public abstract class AbstractList<E> implements List<E>{
+
+import com.structure.inter.List;
+
+public abstract class AbstractList<E> implements List<E> {
 
     protected static final int ELEMENT_NOT_FOUND = -1;
 
