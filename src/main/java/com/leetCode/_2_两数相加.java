@@ -1,7 +1,7 @@
 package com.leetCode;
 
 
-import com.algorithm.ListNode;
+import com.leetCode.common.ListNode;
 import org.junit.Test;
 
 /**

@@ -1,6 +1,6 @@
 package com.leetCode;
 
-import com.algorithm.ListNode;
+import com.leetCode.common.ListNode;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 

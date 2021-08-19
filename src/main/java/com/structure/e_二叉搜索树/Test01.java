@@ -87,5 +87,31 @@ public class Test01 {
         bst.visit(OrderTypeEnum.postorder.index, element -> System.out.print("_" + element + "_ "));
     }
 
+    @Test
+    public void Test06(){
+        Integer[] data = new Integer[]{7 ,4, 9, 2, 5, 8, 11, 3, 1};
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        for (int i = 0; i < data.length; i++) {
+            int nextInt = data[i];
+            bst.add(nextInt);
+        }
+        BinaryTrees.println(bst);
+//        bst.visit(OrderTypeEnum.postorder.index, element -> System.out.print("_" + element + "_ "));
+        System.out.println(bst.height());
+    }
+
+    @Test
+    public void Test07(){
+        Integer[] data = new Integer[]{4,2,7,1,3,6,9};
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        for (int i = 0; i < data.length; i++) {
+            int nextInt = data[i];
+            bst.add(nextInt);
+        }
+        BinaryTrees.println(bst);
+//        bst.visit(OrderTypeEnum.postorder.index, element -> System.out.print("_" + element + "_ "));
+        System.out.println(bst.isComplete());
+    }
+
 
 }

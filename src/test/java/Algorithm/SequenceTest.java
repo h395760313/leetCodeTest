@@ -1,7 +1,7 @@
 package Algorithm;
 
-import com.algorithm.ListNode;
-import com.algorithm.TreeNode;
+import com.leetCode.common.ListNode;
+import com.leetCode.common.TreeNode;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 

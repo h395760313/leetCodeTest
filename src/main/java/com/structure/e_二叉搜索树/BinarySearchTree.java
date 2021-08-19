@@ -1,10 +1,9 @@
 package com.structure.e_二叉搜索树;
 
 import com.structure.printer.BinaryTreeInfo;
+import com.sun.source.tree.LineMap;
 
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
@@ -212,6 +211,93 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
     }
 
+    /**
+     * 迭代方法获取树的高度
+     * @return
+     */
+    public int height(){
+        Queue<Node<E>> queue = new LinkedList<>();
+        // 树的高度
+        int height = 0;
+        // 存储每一层元素数量
+        int levelSize = 1;
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            levelSize --;
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+            if (levelSize == 0) {
+                // 即将访问下一层
+                height++;
+                levelSize = queue.size();
+            }
+        }
+        return height;
+    }
+
+    /**
+     * 判断树是否是完全二叉树
+     * 如果node.left != null && node.right != null， 将node.left、node.right按顺序入队
+     * 如果node.left = null && node.right != null， 返回false
+     * 如果node.left != null && node.right = null 或者 node.left == null && node.right == null  那么后面遍历的节点应该都为叶子节点，才是完全二叉树，否则返回false
+     * @return
+     */
+    public boolean isComplete(){
+        if (root == null) return false;
+
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean leaf = false;
+        while (!queue.isEmpty()){
+            Node<E> node = queue.poll();
+            if (leaf && !node.isLeaf()){
+                return false;
+            }
+
+            if (node.hasTwoChildren()) {
+                queue.offer(node.left);
+                queue.offer(node.right);
+            }else if (node.left == null && node.right != null){
+                return false;
+            } else {
+                leaf = true;
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 通过递归获取树的高度
+     * @param node
+     * @return
+     */
+    private int height2(Node<E> node){
+        if (node == null) return 0;
+        return 1 + Math.max(height2(node.left), height2(node.right));
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        toString(root, sb, "");
+        return sb.toString();
+    }
+
+    private void toString(Node<E> node, StringBuffer sb, String prefix) {
+        if (node == null) return;
+        sb.append(prefix).append(node.element).append("\n");
+        toString(node.left, sb, prefix + "【L】");
+        toString(node.right, sb, prefix + "【R】");
+    }
+
     private void elementNotNullCheck(E element) {
         if (element == null) {
             throw new RuntimeException("element must not be null");
@@ -251,6 +337,14 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         public Node(E element, Node<E> parent) {
             this.element = element;
             this.parent = parent;
+        }
+
+        public boolean isLeaf(){
+            return left == null && right == null;
+        }
+
+        public boolean hasTwoChildren(){
+            return left != null && right != null;
         }
     }
 }

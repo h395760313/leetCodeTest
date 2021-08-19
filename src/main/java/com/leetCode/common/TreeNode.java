@@ -1,4 +1,4 @@
-package com.algorithm;
+package com.leetCode.common;
 
 public class TreeNode {
     public int val;
@@ -16,5 +16,10 @@ public class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
+    }
+
+    @Override
+    public String toString() {
+        return left + "_" + val + "_" + right + "  ";
     }
 }
