@@ -1,7 +1,4 @@
-package com.structure.a_动态数组;
-
-
-import com.structure.inter.List;
+package com.structure.inter;
 
 public abstract class AbstractList<E> implements List<E> {
 

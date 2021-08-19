@@ -1,5 +1,8 @@
-package com.structure;
+package com.structure.a_动态数组;
 
+
+import com.structure.inter.AbstractList;
+import com.structure.inter.List;
 
 import java.util.StringJoiner;
 
@@ -7,7 +10,7 @@ import java.util.StringJoiner;
  * 缩容
  * @param <E>
  */
-public class ArrayList2<E> extends AbstractList<E> implements List<E>{
+public class ArrayList2<E> extends AbstractList<E> implements List<E> {
 
     // 所有的元素
     private E[] elements;

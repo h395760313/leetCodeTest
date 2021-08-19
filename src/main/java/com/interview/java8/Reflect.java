@@ -11,7 +11,7 @@ public class Reflect {
 
     @Test
     public void testReflect1() throws ClassNotFoundException {
-        Class<?> c = Class.forName("com.structure.ArrayList");
+        Class<?> c = Class.forName("com.structure.a_动态数组.ArrayList");
         Field[] fs = c.getDeclaredFields(); // 获取所有属性
         StringBuffer sb = new StringBuffer();
         // 最外边的public定义

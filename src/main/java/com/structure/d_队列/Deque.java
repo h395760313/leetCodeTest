@@ -1,4 +1,7 @@
-package com.structure;
+package com.structure.d_队列;
+
+import com.structure.b_链表.LinkedList;
+import com.structure.inter.List;
 
 /**
  * @Author: xiehongyu

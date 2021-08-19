@@ -1,7 +1,7 @@
 package com.leetCode;
 
 import com.alibaba.fastjson.JSON;
-import com.structure.Stack;
+import com.structure.c_栈.Stack;
 import org.junit.Test;
 
 import java.util.HashMap;

@@ -1,8 +1,7 @@
-package com.structure;
+package com.structure.inter;
 
-import java.util.StringJoiner;
 
-interface List<E> {
+public interface List<E> {
 
 
     /**

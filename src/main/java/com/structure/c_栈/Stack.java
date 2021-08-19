@@ -1,4 +1,8 @@
-package com.structure;
+package com.structure.c_栈;
+
+
+import com.structure.a_动态数组.ArrayList;
+import com.structure.inter.List;
 
 /**
  * @Author: xiehongyu

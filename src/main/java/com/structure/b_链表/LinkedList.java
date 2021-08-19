@@ -1,6 +1,7 @@
-package com.structure;
+package com.structure.b_链表;
 
-import com.alibaba.fastjson.JSON;
+import com.structure.inter.AbstractList;
+import com.structure.inter.List;
 
 import java.util.StringJoiner;
 

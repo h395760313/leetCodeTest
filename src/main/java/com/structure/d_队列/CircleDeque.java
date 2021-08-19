@@ -1,4 +1,4 @@
-package com.structure;
+package com.structure.d_队列;
 
 import java.util.StringJoiner;
 
@@ -58,11 +58,11 @@ public class CircleDeque<E> {
     }
 
     public void clear() {
-        size = 0;
         for (int i = 0; i < size; i++) {
             elements[index(i)] = null;
         }
         front = 0;
+        size = 0;
     }
 
     private int index(int index){
