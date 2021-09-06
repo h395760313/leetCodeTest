@@ -304,6 +304,16 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
     }
 
+    private Node<E> getPredecessor(Node<E> node){
+        if (node.left != null) {
+            node = node.left;
+            while (node.right!=null){
+
+            }
+        }
+        return null;
+    }
+
     @Override
     public Object root() {
         return root;

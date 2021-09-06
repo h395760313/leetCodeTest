@@ -9,15 +9,35 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] selectionSort(int[] arr) {
+    public int[] selectionSort1(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             int point = i;
-            for (int j = i; j < arr.length; j++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 if (arr[point] > arr[j]) {
                     point = j;
                 }
             }
-            swap(arr, point, i);
+            if (point != i) swap(arr,point,i);
+        }
+        return arr;
+    }
+
+    /**
+     * 01.选择排序
+     * 循环遍历选最大放后面 指针指向最大数
+     *
+     * @Author: xiehy
+     * @Date: 2021/3/5
+     */
+    public int[] selectionSort2(int[] arr) {
+        for (int i = arr.length - 1; i > 0; i--) {
+            int point = i;
+            for (int j = 0; j < i; j++) {
+                if (arr[point] < arr[j]){
+                   point = j;
+                }
+                swap(arr,point,i);
+            }
         }
         return arr;
     }
@@ -25,18 +45,20 @@ public class ArraySort {
 
     /**
      * 02.冒泡排序
-     *
+     * 思路：每轮遍历将最大的放到最后，并在下次遍历中忽略此数
      * @Author: xiehy
      * @Date: 2021/3/5
      */
     public int[] bubbleSort(int[] arr) {
-
-        for (int i = 0; i < arr.length - 1; i++) {
+        for (int i = 0; i < arr.length; i++) {
+            boolean flag = true;
             for (int j = 0; j < arr.length - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    swap(arr, j, j + 1);
+                if (arr[j] > arr[j + 1]){
+                    swap(arr,j,j + 1);
+                    flag = false;
                 }
             }
+            if (flag) break;
         }
         return arr;
     }
@@ -58,10 +80,10 @@ public class ArraySort {
         return arr;
     }
 
-    private void swap(int[] arr, int j, int i2) {
-        int temp = arr[j];
-        arr[j] = arr[i2];
-        arr[i2] = temp;
+    private void swap(int[] arr, int a, int b) {
+        int temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
     }
 
 

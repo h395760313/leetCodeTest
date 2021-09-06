@@ -6,11 +6,12 @@ public class SortTest {
 
 //    int[] arr = {9, 3, 1, 4, 6, 8, 7, 5, 2};
     int[] arr = {9,6,11,3,5,12,8,7,10,15,14,4,1,13,2};
+//    int[] arr = {10,2,3,4,5,6,7,8,9,1};
     ArraySort arraySort = new ArraySort();
 
     @Test
     public void selectionSortTest(){
-        int[] ints = arraySort.selectionSort(arr);
+        int[] ints = arraySort.selectionSort2(arr);
         sout(ints);
     }
 
