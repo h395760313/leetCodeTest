@@ -1,47 +1,47 @@
 package msbalgorithm.sort;
 
+import com.tools.Asserts;
+import com.tools.Integers;
+import com.tools.Times;
 import org.junit.Test;
 
 public class SortTest {
 
-//    int[] arr = {9, 3, 1, 4, 6, 8, 7, 5, 2};
-    int[] arr = {9,6,11,3,5,12,8,7,10,15,14,4,1,13,2};
-//    int[] arr = {10,2,3,4,5,6,7,8,9,1};
+    Integer[] arr = Integers.random(1000000,10000,10000000);
     ArraySort arraySort = new ArraySort();
 
     @Test
     public void selectionSortTest(){
-        int[] ints = arraySort.selectionSort2(arr);
-        sout(ints);
+        Times.test("测试选择排序", ()-> arraySort.selectionSort2(arr));
+        Asserts.test(Integers.isAscOrder(arr));
     }
 
     @Test
     public void bubbleSortTest(){
-        int[] ints = arraySort.bubbleSort(arr);
-        sout(ints);
+        Times.test("测试冒泡排序", ()-> arraySort.bubbleSort(arr));
+        Asserts.test(Integers.isAscOrder(arr));
     }
 
     @Test
     public void insertionSortTest(){
-        int[] ints = arraySort.insertionSort(arr);
-        sout(ints);
+        Times.test("测试插入排序", ()-> arraySort.insertionSort(arr));
+        Asserts.test(Integers.isAscOrder(arr));
     }
 
 
     @Test
     public void shellSortTest() {
-        int[] ints = arraySort.shellSort(arr);
-        sout(ints);
+        Times.test("测试希尔排序", ()-> arraySort.shellSort(arr));
+        Asserts.test(Integers.isAscOrder(arr));
     }
 
     @Test
     public void mergeSortTest() {
-        int[] arr1 = new int[]{2, 4, 7, 8, 3, 6, 9};
-
-//        int[] ints = arraySort.mergeSort1();
-        int[] ints = arraySort.mergeSort2(arr1);
-//        int[] ints = arraySort.mergeSort3();
-        sout(ints);
+        Integer[] copy = Integers.copy(arr);
+        Times.test("测试归并排序1", ()-> arraySort.mergeSort1(arr));
+        Asserts.test(Integers.isAscOrder(arraySort.mergeSort1(arr)));
+        Times.test("测试归并排序2", ()-> arraySort.mergeSort2(copy));
+        Asserts.test(Integers.isAscOrder(arraySort.mergeSort2(copy)));
     }
 
 
@@ -53,8 +53,8 @@ public class SortTest {
 
 
 
-    private void sout(int[] ints) {
-        for (int i : ints) {
+    private void sout(Integer[] ints) {
+        for (Integer i : ints) {
             System.out.print(i + "\t");
         }
     }

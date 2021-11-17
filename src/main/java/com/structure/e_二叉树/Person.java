@@ -1,4 +1,4 @@
-package com.structure.e_二叉搜索树;
+package com.structure.e_二叉树;
 
 /**
  * @Author: xiehongyu

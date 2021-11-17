@@ -1,10 +1,8 @@
-package com.structure.e_二叉搜索树;
+package com.structure.e_二叉树;
 
 import com.structure.printer.BinaryTreeInfo;
-import com.sun.source.tree.LineMap;
 
 import java.util.*;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @Author: xiehongyu
@@ -33,7 +31,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     public void clear() {
-
+        root = null;
+        size = 0;
     }
 
     public void add(E element) {
@@ -78,14 +77,51 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return ((Comparable<E>) e1).compareTo(e2);
     }
 
+    /**
+     * 删除节点
+     * @param element
+     */
     public void remove(E element) {
+        Node<E> node = node(element);
 
+        if (node.hasTwoChildren()) { // 度为2的节点
+            // 找到前驱或者后继节点
+            Node<E> predecessor = getPredecessor(node);
+            node.element = predecessor.element; // 用前驱节点的值覆盖需要删除的节点的值
+            node = predecessor; // 只需要删除前驱节点即可
+        }
+
+        // 删除度为1或者0的节点
+        Node<E> replaceNode = node.right == null ? node.left : node.right;
+        if (replaceNode != null) { // 表示被删除节点的度为1
+            replaceNode.parent = node.parent; // 设置替换者的parent为被删除节点的parent
+            if (node.parent == null) { // 表示被删除节点是度为1的根节点
+                root = replaceNode;
+            }else if (node == node.parent.left) { // 表示被删除节点是度为1的parent的左子节点
+                node.parent.left = replaceNode;
+            } else { // node == node.parent.right 表示被删除节点是度为1的parent的右子节点
+                node.parent.right = replaceNode;
+            }
+
+        }else { // 表示被删除节点的度为0
+            if (node.parent == null) { // 表示叶子节点并且是根节点
+                root = null;
+            } else if (node == node.parent.left) { // 表示叶子节点并且是左子节点
+                node.parent.left = replaceNode;
+            } else { // node == node.parent.right 表示叶子节点并且是右子节点
+                node.parent.right = replaceNode;
+            }
+        }
     }
 
     public boolean contains(E element) {
-        return false;
+        return node(element) != null;
     }
 
+    /**
+     * 遍历
+     * @param orderType
+     */
     public void Traversal(int orderType) {
         if (orderType == OrderTypeEnum.Preorder.index) {
             preorderTraversal(root);
@@ -98,6 +134,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
     }
 
+    /**
+     * 访问
+     * @param orderType
+     * @param visitor
+     */
     public void visit(int orderType, Visitor<E> visitor) {
         if (orderType == OrderTypeEnum.Preorder.index) {
             preorderVisit(root, visitor);
@@ -106,7 +147,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         } else if (orderType == OrderTypeEnum.postorder.index) {
             postorderVisit(root, visitor);
         } else if (orderType == OrderTypeEnum.levelorder.index) {
-            levelorderVisit( visitor);
+            levelorderVisit(visitor);
         }
     }
 
@@ -143,6 +184,10 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         visitor.visit(node.element);
     }
 
+    /**
+     * 层序访问
+     * @param visitor
+     */
     public void levelorderVisit(Visitor<E> visitor){
         if (root == null || visitor == null) return;
         Queue<Node<E>> queue = new LinkedList<>();
@@ -197,11 +242,12 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
      */
     private void levelorderTraversal() {
         if (root == null) return;
+
         Queue<Node<E>> queue = new LinkedList<>();
-        queue.add(root);
+        queue.offer(root);
         while (!queue.isEmpty()) {
             Node<E> node = queue.poll();
-            System.out.println(node.element);
+            System.out.println(node);
             if (node.left != null) {
                 queue.offer(node.left);
             }
@@ -284,6 +330,20 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return 1 + Math.max(height2(node.left), height2(node.right));
     }
 
+    private Node<E> node(E element){
+        Node<E> node = root;
+        while (node != null) {
+            if (compare(element, node.element) == 0) {
+                return node;
+            }else if (compare(element, node.element) > 0){
+                node = node.right;
+            }else {
+                node = node.left;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
@@ -304,14 +364,47 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
     }
 
+    /**
+     * 前驱节点
+     * @param node
+     * @return
+     */
     private Node<E> getPredecessor(Node<E> node){
-        if (node.left != null) {
-            node = node.left;
-            while (node.right!=null){
-
+        // 左节点不为空 node = left.right.right.right.....
+        Node<E> pre = node.left;
+        if (pre != null) {
+            while (pre.right != null){
+                pre = pre.right;
             }
+            return pre;
         }
-        return null;
+
+        // 从祖父节点找前驱节点 node = parent.parent.parent... 直到节点为父节点的右节点停止
+        while (node.parent != null && node == node.parent.left) {
+            node = node.parent;
+        }
+        return node.parent;
+    }
+    /**
+     * 后驱节点
+     * @param node
+     * @return
+     */
+    private Node<E> getPostdecessor(Node<E> node){
+        // 左节点不为空 node = right.left.left.left.....
+        Node<E> post = node.right;
+        if (post != null) {
+            while (post.left != null){
+                post = post.left;
+            }
+            return post;
+        }
+
+        // 从祖父节点找前驱节点 node = parent.parent.parent... 直到节点为父节点的左节点停止
+        while (node.parent != null && node == node.parent.right) {
+            node = node.parent;
+        }
+        return node.parent;
     }
 
     @Override
@@ -355,6 +448,11 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
         public boolean hasTwoChildren(){
             return left != null && right != null;
+        }
+
+        @Override
+        public String toString() {
+            return element + "";
         }
     }
 }

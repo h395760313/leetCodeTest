@@ -9,17 +9,16 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] selectionSort1(int[] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            int point = i;
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[point] > arr[j]) {
-                    point = j;
+    public void selectionSort1(Integer[] arr) {
+        for (Integer i = 0; i < arr.length - 1; i++) {
+            Integer poInteger = i;
+            for (Integer j = i + 1; j < arr.length; j++) {
+                if (arr[poInteger] > arr[j]) {
+                    poInteger = j;
                 }
             }
-            if (point != i) swap(arr,point,i);
+            if (poInteger != i) swap(arr,poInteger,i);
         }
-        return arr;
     }
 
     /**
@@ -29,17 +28,16 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] selectionSort2(int[] arr) {
-        for (int i = arr.length - 1; i > 0; i--) {
-            int point = i;
-            for (int j = 0; j < i; j++) {
-                if (arr[point] < arr[j]){
-                   point = j;
+    public void selectionSort2(Integer[] arr) {
+        for (Integer begin = 0,end = arr.length - 1; end >= 0; end--) {
+            Integer maxIndex = 0;
+            for (Integer j = begin; j <= end; j++) {
+                if (arr[j] >= arr[maxIndex]) {
+                    maxIndex = j;
                 }
-                swap(arr,point,i);
             }
+            if (maxIndex != end) swap(arr,maxIndex,end);
         }
-        return arr;
     }
 
 
@@ -49,18 +47,14 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] bubbleSort(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            boolean flag = true;
-            for (int j = 0; j < arr.length - i - 1; j++) {
-                if (arr[j] > arr[j + 1]){
-                    swap(arr,j,j + 1);
-                    flag = false;
+    public void bubbleSort(Integer[] arr) {
+        for (Integer i = 0; i < arr.length; i++) {
+            for (Integer j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
                 }
             }
-            if (flag) break;
         }
-        return arr;
     }
 
     /**
@@ -69,19 +63,18 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] insertionSort(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            int j = i;
+    public void insertionSort(Integer[] arr) {
+        for (Integer i = 1; i < arr.length; i++) {
+            Integer j = i;
             while (j >= 1 && arr[j] < arr[j - 1]) {
                 swap(arr, j, j - 1);
                 j--;
             }
         }
-        return arr;
     }
 
-    private void swap(int[] arr, int a, int b) {
-        int temp = arr[a];
+    private void swap(Integer[] arr, Integer a, Integer b) {
+        Integer temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
     }
@@ -93,9 +86,8 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] heapSort(int[] arr) {
+    public void heapSort(Integer[] arr) {
         // todo
-        return arr;
     }
 
     /**
@@ -106,14 +98,14 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] shellSort(int[] arr) {
-        int h = 1;
+    public void shellSort(Integer[] arr) {
+        Integer h = 1;
         while (h < arr.length / 3) {
             h = h * 3 + 1;
         }
         while (h >= 1) {
-            for (int i = h; i < arr.length; i++) {
-                for (int j = i; j > h - 1; j -= h) {
+            for (Integer i = h; i < arr.length; i++) {
+                for (Integer j = i; j > h - 1; j -= h) {
                     if (arr[j] < arr[j - 1]) {
                         swap(arr, j, j - 1);
                     }
@@ -121,7 +113,6 @@ public class ArraySort {
             }
             h = (h - 1) / 3;
         }
-        return arr;
     }
 
     /**
@@ -131,40 +122,31 @@ public class ArraySort {
      * @Date: 2021/3/5
      */
 
-    public int[] mergeSort1(int[] arr) {
+    public Integer[] mergeSort1(Integer[] arr) {
         int mid = arr.length >> 1;
         int i = 0;
         int j = mid + 1;
         int k = 0;
-        int[] newArr = new int[arr.length];
-        while (i <= mid && j < arr.length) {
-            newArr[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
+
+        Integer[] res = new Integer[arr.length];
+        while (i <= mid || j < arr.length) {
+            if (i > mid) {
+                res[k++] = arr[j++];
+            }else if (j >= arr.length) {
+                res[k++] = arr[i++];
+            }else {
+                res[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
+            }
         }
-        while (i <= mid) newArr[k++] = arr[i++];
-        while (j < arr.length) newArr[k++] = arr[j++];
-        return newArr;
+        return res;
     }
 
-    public int[] mergeSort2(int[] arr) {
-        int mid = arr.length >> 1;
-        int i = 0;
-        int j = mid + 1;
-        int k = 0;
-        int[] newArr = new int[arr.length];
-        while (i <= mid && j < arr.length) {
-            newArr[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
-        }
-        while (i <= mid) newArr[k++] = arr[i++];
-        while (j < arr.length) newArr[k++] = arr[j++];
-        return newArr;
-    }
-
-    public int[] mergeSort3(int[] arr) {
-        int mid = arr.length >> 1;
-        int i = 0;
-        int j = mid + 1;
-        int k = 0;
-        int[] newArr = new int[arr.length];
+    public Integer[] mergeSort2(Integer[] arr) {
+        Integer mid = arr.length >> 1;
+        Integer i = 0;
+        Integer j = mid + 1;
+        Integer k = 0;
+        Integer[] newArr = new Integer[arr.length];
         while (i <= mid && j < arr.length) {
             newArr[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
         }
@@ -179,9 +161,8 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] quickSort(int[] arr) {
+    public void quickSort(Integer[] arr) {
 
-        return arr;
     }
 
     /**
@@ -190,9 +171,8 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] bucketSort(int[] arr) {
+    public void bucketSort(Integer[] arr) {
 
-        return arr;
     }
 
     /**
@@ -201,9 +181,8 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] countingSort(int[] arr) {
+    public void countingSort(Integer[] arr) {
 
-        return arr;
     }
 
     /**
@@ -212,8 +191,7 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public int[] radixSort(int[] arr) {
+    public void radixSort(Integer[] arr) {
 
-        return arr;
     }
 }

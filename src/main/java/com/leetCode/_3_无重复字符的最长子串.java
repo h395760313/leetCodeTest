@@ -13,19 +13,7 @@ import java.util.Map;
  */
 public class _3_无重复字符的最长子串 {
     public int lengthOfLongestSubstring(String s) {
-        if (s.length() < 2) return s.length();
-
-        Map<Character,Integer> map = new HashMap<>();
-        int maxLen = 1;
-        for (int start = 0,end = 0; end < s.length(); end++) {
-            char c = s.charAt(end);
-            if (map.containsKey(c)){
-                start = Math.max(start,map.get(c));
-            }
-            maxLen = Math.max(maxLen,end - start + 1);
-            map.put(c,end + 1);
-        }
-        return maxLen;
+        return 0;
     }
 
     @Test
