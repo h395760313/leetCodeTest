@@ -1,4 +1,4 @@
-package com.structure.e_二叉树;
+package com.structure.e_树;
 
 import com.structure.printer.BinaryTreeInfo;
 
