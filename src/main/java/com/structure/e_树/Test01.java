@@ -2,6 +2,9 @@ package com.structure.e_树;
 
 import com.alibaba.fastjson.JSON;
 import com.leetCode.common.TreeNode;
+import com.structure.e_树.a_二叉树.AVLTree;
+import com.structure.e_树.a_二叉树.BST;
+import com.structure.e_树.a_二叉树.BinaryTree;
 import com.structure.printer.BinaryTrees;
 import org.junit.Test;
 
@@ -106,7 +109,6 @@ public class Test01 {
 //        bst.visit(OrderTypeEnum.postorder.index, element -> System.out.print("_" + element + "_ "));
         bst.remove(4);
         BinaryTrees.println(bst);
-
     }
 
     @Test
@@ -152,4 +154,16 @@ public class Test01 {
         return res;
     }
 
+
+
+    @Test
+    public void Test09(){
+        Integer[] data = new Integer[]{4,2,7,1,3,5,6,9};
+        BST<Integer> bst = new AVLTree<>();
+        for (int i = 0; i < data.length; i++) {
+            int nextInt = data[i];
+            bst.add(nextInt);
+        }
+        BinaryTrees.println(bst);
+    }
 }

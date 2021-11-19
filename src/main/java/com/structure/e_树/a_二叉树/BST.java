@@ -20,6 +20,7 @@ public class BST<E> extends BinaryTree<E> {
         if (root == null) {
             root = new Node<>(element, null);
             size++;
+            afterAdd(root);
             return;
         }
 
@@ -47,7 +48,10 @@ public class BST<E> extends BinaryTree<E> {
             parent.left = newNode;
         }
         size++;
+        afterAdd(newNode);
     }
+
+    protected void afterAdd(Node<E> node){};
 
     public boolean contains(E element) {
         return node(element) != null;
@@ -117,4 +121,6 @@ public class BST<E> extends BinaryTree<E> {
             throw new RuntimeException("element must not be null");
         }
     }
+
+
 }

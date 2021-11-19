@@ -243,6 +243,11 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         return "p(" + (myNode.parent == null ? "null" : myNode.parent.element) + ")_" + myNode.element;
     }
 
+    protected Node<E> createNode(E element, Node<E> parent){
+        return new Node<>(element, parent);
+    }
+
+
     public static abstract class Visitor<E>{
         boolean stop;
         /**
@@ -251,10 +256,10 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         abstract boolean visit(E element);
     }
     protected static class Node<E> {
-        protected E element;
-        protected Node<E> left;
-        protected Node<E> right;
-        protected Node<E> parent;
+        E element;
+        Node<E> left;
+        Node<E> right;
+        Node<E> parent;
 
         public Node(E element, Node<E> parent) {
             this.element = element;
@@ -267,6 +272,14 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
         public boolean hasTwoChildren(){
             return left != null && right != null;
+        }
+
+        public boolean isLeftChild(){
+            return parent != null && parent.left == this;
+        }
+
+        public boolean isRightChild(){
+            return parent != null && parent.right == this;
         }
 
         @Override
