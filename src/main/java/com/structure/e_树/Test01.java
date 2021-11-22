@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.leetCode.common.TreeNode;
 import com.structure.e_树.a_二叉树.AVLTree;
 import com.structure.e_树.a_二叉树.BST;
-import com.structure.e_树.a_二叉树.BinaryTree;
 import com.structure.printer.BinaryTrees;
+import com.sun.source.tree.BinaryTree;
+import com.tools.Times;
+import jdk.nashorn.internal.ir.BinaryNode;
 import org.junit.Test;
 
 import java.util.*;
@@ -74,7 +76,7 @@ public class Test01 {
 
     @Test
     public void Test05(){
-        Integer[] data = new Integer[]{7 ,4, 9, 2, 5, 8, 11, 3, 1, 12};
+        Integer[] data = new Integer[]{7 ,4, 9, 2, 1};
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
         for (int i = 0; i < data.length; i++) {
             int nextInt = data[i];
@@ -100,7 +102,7 @@ public class Test01 {
     @Test
     public void Test07(){
         Integer[] data = new Integer[]{4,2,7,1,3,5,6,9};
-        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        AVLTree<Integer> bst = new AVLTree<>();
         for (int i = 0; i < data.length; i++) {
             int nextInt = data[i];
             bst.add(nextInt);
@@ -158,12 +160,58 @@ public class Test01 {
 
     @Test
     public void Test09(){
-        Integer[] data = new Integer[]{4,2,7,1,3,5,6,9};
-        BST<Integer> bst = new AVLTree<>();
+//        Integer[] data = new Integer[]{1,2,3,4,5,6,7,8};
+        Integer[] data = new Integer[]{13,14,15,12,11,17,16,8,9,1,18};
+        AVLTree<Integer> bst = new AVLTree<>();
         for (int i = 0; i < data.length; i++) {
-            int nextInt = data[i];
-            bst.add(nextInt);
+            bst.add(data[i]);
         }
         BinaryTrees.println(bst);
+        bst.remove(15);
+        BinaryTrees.println(bst);
+
+    }
+    @Test
+    public void Test10(){
+        List<Integer> data = new ArrayList<>();
+        for (int i = 0; i < 1000_000; i++) {
+            data.add((int) (Math.random() * 1000_0000));
+        }
+
+        BST<Integer> bst = new BST<>();
+        Times.test("测试bst添加", ()->{
+            for (int i = 0; i < data.size(); i++) {
+                bst.add(data.get(i));
+            }
+        });
+        Times.test("测试bst查询", ()->{
+            for (int i = 0; i < data.size(); i++) {
+                bst.contains(data.get(i));
+            }
+        });
+        Times.test("测试bst删除", ()->{
+            for (int i = 0; i < data.size(); i++) {
+                bst.remove(data.get(i));
+            }
+        });
+
+        AVLTree<Integer> avl = new AVLTree<>();
+        Times.test("测试avl添加", ()->{
+            for (int i = 0; i < data.size(); i++) {
+                avl.add(data.get(i));
+            }
+        });
+        Times.test("测试avl查询", ()->{
+            for (int i = 0; i < data.size(); i++) {
+                avl.contains(data.get(i));
+            }
+        });
+        Times.test("测试avl删除", ()->{
+            for (int i = 0; i < data.size(); i++) {
+                avl.remove(data.get(i));
+            }
+        });
+
+
     }
 }

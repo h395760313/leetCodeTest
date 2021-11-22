@@ -7,6 +7,21 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="aliyun" />
+      <option name="name" value="aliyun" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="llgroup-ll-packages-production" />
+      <option name="name" value="production" />
+      <option name="url" value="https://llgroup-maven.pkg.coding.net/repository/ll-packages/production/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="llgroup-ll-packages-non-production" />
+      <option name="name" value="non-production" />
+      <option name="url" value="https://llgroup-maven.pkg.coding.net/repository/ll-packages/non-production/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
@@ -15,6 +30,11 @@
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="ll-public" />
+      <option name="url" value="http://maven.lianlianlvyou.com/repository/maven-public/" />
     </remote-repository>
   </component>
 </project>

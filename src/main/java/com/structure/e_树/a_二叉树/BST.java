@@ -17,8 +17,9 @@ public class BST<E> extends BinaryTree<E> {
 
     public void add(E element) {
         elementNotNullCheck(element);
+        // 添加第一个节点
         if (root == null) {
-            root = new Node<>(element, null);
+            root = createNode(element, null);
             size++;
             afterAdd(root);
             return;
@@ -41,7 +42,8 @@ public class BST<E> extends BinaryTree<E> {
             }
         }
 
-        Node<E> newNode = new Node<>(element, parent);
+        // 看看插入到父节点的哪个位置
+        Node<E> newNode = createNode(element, parent);
         if (cmp > 0) {
             parent.right = newNode;
         } else {
@@ -51,7 +53,15 @@ public class BST<E> extends BinaryTree<E> {
         afterAdd(newNode);
     }
 
-    protected void afterAdd(Node<E> node){};
+    protected void afterAdd(Node<E> node) {
+    }
+
+    ;
+
+    protected void afterRemove(Node<E> node) {
+    }
+
+    ;
 
     public boolean contains(E element) {
         return node(element) != null;
@@ -59,11 +69,16 @@ public class BST<E> extends BinaryTree<E> {
 
     /**
      * 删除节点
+     *
      * @param element
      */
     public void remove(E element) {
-        Node<E> node = node(element);
+        remove(node(element));
+    }
 
+    private void remove(Node<E> node) {
+        if (node == null) return;
+        size--;
         if (node.hasTwoChildren()) { // 度为2的节点
             // 找到前驱或者后继节点
             Node<E> predecessor = getPredecessor(node);
@@ -77,31 +92,36 @@ public class BST<E> extends BinaryTree<E> {
             replaceNode.parent = node.parent; // 设置替换者的parent为被删除节点的parent
             if (node.parent == null) { // 表示被删除节点是度为1的根节点
                 root = replaceNode;
-            }else if (node == node.parent.left) { // 表示被删除节点是度为1的parent的左子节点
+            } else if (node == node.parent.left) { // 表示被删除节点是度为1的parent的左子节点
                 node.parent.left = replaceNode;
             } else { // node == node.parent.right 表示被删除节点是度为1的parent的右子节点
                 node.parent.right = replaceNode;
             }
-
-        }else { // 表示被删除节点的度为0
-            if (node.parent == null) { // 表示叶子节点并且是根节点
-                root = null;
-            } else if (node == node.parent.left) { // 表示叶子节点并且是左子节点
+            // 删除节点后的处理
+            afterRemove(node);
+        } else if (node.parent == null) { // 表示叶子节点并且是根节点
+            root = null;
+            // 删除节点后的处理
+            afterRemove(node);
+        } else {
+            if (node == node.parent.left) { // 表示叶子节点并且是左子节点
                 node.parent.left = replaceNode;
             } else { // node == node.parent.right 表示叶子节点并且是右子节点
                 node.parent.right = replaceNode;
             }
+            // 删除节点后的处理
+            afterRemove(node);
         }
     }
 
-    private Node<E> node(E element){
+    private Node<E> node(E element) {
         Node<E> node = root;
         while (node != null) {
             if (compare(element, node.element) == 0) {
                 return node;
-            }else if (compare(element, node.element) > 0){
+            } else if (compare(element, node.element) > 0) {
                 node = node.right;
-            }else {
+            } else {
                 node = node.left;
             }
         }

@@ -3,7 +3,6 @@ package com.structure.e_树.a_二叉树;
 import com.structure.e_树.OrderTypeEnum;
 import com.structure.printer.BinaryTreeInfo;
 
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,8 +14,6 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     protected int size;
     protected Node<E> root;
-
-    public BinaryTree() {}
 
     public int size() {
         return size;
@@ -260,26 +257,25 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         Node<E> left;
         Node<E> right;
         Node<E> parent;
-
         public Node(E element, Node<E> parent) {
             this.element = element;
             this.parent = parent;
         }
 
-        public boolean isLeaf(){
+        public boolean isLeaf() {
             return left == null && right == null;
         }
 
-        public boolean hasTwoChildren(){
+        public boolean hasTwoChildren() {
             return left != null && right != null;
         }
 
-        public boolean isLeftChild(){
-            return parent != null && parent.left == this;
+        public boolean isLeftChild() {
+            return parent != null && this == parent.left;
         }
 
-        public boolean isRightChild(){
-            return parent != null && parent.right == this;
+        public boolean isRightChild() {
+            return parent != null && this == parent.right;
         }
 
         @Override
