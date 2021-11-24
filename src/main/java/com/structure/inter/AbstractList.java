@@ -2,7 +2,6 @@ package com.structure.inter;
 
 public abstract class AbstractList<E> implements List<E> {
 
-    protected static final int ELEMENT_NOT_FOUND = -1;
 
     // 元素的数量
     protected int size;

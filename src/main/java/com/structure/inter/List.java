@@ -3,6 +3,7 @@ package com.structure.inter;
 
 public interface List<E> {
 
+    int ELEMENT_NOT_FOUND = -1;
 
     /**
      * 元素的数量

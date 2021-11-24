@@ -9,7 +9,7 @@ import org.junit.Test;
  * @Author: xiehongyu
  * @Date: 2021/7/20 09:54
  */
-public class 两数相加_211122 {
+public class _2_211122 {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode res = new ListNode(0);

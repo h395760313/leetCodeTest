@@ -1,4 +1,4 @@
-package com.structure.printer;
+package com.structure.e_树.printer;
 
 public class Strings {
 	public static String repeat(String string, int count) {

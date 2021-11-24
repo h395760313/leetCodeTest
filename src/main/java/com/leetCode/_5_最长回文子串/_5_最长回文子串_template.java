@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 /**
- *
+ * https://leetcode-cn.com/problems/longest-palindromic-substring/
  * @Author: xiehongyu
  * @Date: 2021/7/20 09:54
  * 思路：首先长度处理：当字符串长度小于2时返回自己；在字符串中拼接一个符号，

@@ -1,4 +1,4 @@
-package com.structure.file;
+package com.structure.common.file;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,6 +1,6 @@
 package com.structure.e_树;
 
-import com.structure.printer.BinaryTreeInfo;
+import com.structure.e_树.printer.BinaryTreeInfo;
 
 import java.util.*;
 

@@ -4,10 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.leetCode.common.TreeNode;
 import com.structure.e_树.a_二叉树.AVLTree;
 import com.structure.e_树.a_二叉树.BST;
-import com.structure.printer.BinaryTrees;
-import com.sun.source.tree.BinaryTree;
+import com.structure.e_树.a_二叉树.RBTree;
+import com.structure.e_树.printer.BinaryTrees;
 import com.tools.Times;
-import jdk.nashorn.internal.ir.BinaryNode;
 import org.junit.Test;
 
 import java.util.*;
@@ -211,7 +210,17 @@ public class Test01 {
                 avl.remove(data.get(i));
             }
         });
+    }
 
 
+    @Test
+    public void test10(){
+        Integer[] data = new Integer[]{26, 7, 83, 33};
+        RBTree<Integer> rbTree = new RBTree<>();
+        for (int i = 0; i < data.length; i++) {
+            rbTree.add(data[i]);
+        }
+
+        BinaryTrees.print(rbTree);
     }
 }

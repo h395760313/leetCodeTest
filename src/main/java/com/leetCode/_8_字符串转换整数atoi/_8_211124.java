@@ -8,7 +8,7 @@ import org.junit.Test;
  * @author xiehongyu
  * @date 2021/11/24 10:39
  */
-public class _8_字符串转换整数atoi_template {
+public class _8_211124 {
 
     public int myAtoi(String s) {
         return 0;

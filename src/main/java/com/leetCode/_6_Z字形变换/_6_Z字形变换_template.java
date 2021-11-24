@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * https://leetcode-cn.com/problems/zigzag-conversion/
+ * 思路：当当前行数 num % numRows == 0 ，改变方向， 每一行的字符串使用StringBuffer拼接
  * @Author: xiehongyu
  * @Date: 2021/7/20 09:54
  */
@@ -18,9 +19,9 @@ public class _6_Z字形变换_template {
     public String convert(String s, int numRows) {
         if (numRows < 2) return s;
         if (s.length() < 2) return s;
-        List<StringBuffer> list = new ArrayList<>(numRows);
+        List<StringBuilder> list = new ArrayList<>(numRows);
         for (int i = 0; i < numRows; i++) {
-            list.add(new StringBuffer());
+            list.add(new StringBuilder());
         }
         int flag = 1;
         int row = 0;
@@ -29,7 +30,7 @@ public class _6_Z字形变换_template {
             if (i != 0) if (row == numRows -1 || row == 0) flag = -flag;
             row += flag;
         }
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < numRows; i++) {
             sb.append(list.get(i));
         }

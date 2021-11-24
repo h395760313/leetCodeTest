@@ -1,7 +1,7 @@
 package com.structure.e_树.a_二叉树;
 
 import com.structure.e_树.OrderTypeEnum;
-import com.structure.printer.BinaryTreeInfo;
+import com.structure.e_树.printer.BinaryTreeInfo;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -236,8 +236,7 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 
     @Override
     public Object string(Object node) {
-        Node<E> myNode = (Node<E>) node;
-        return "p(" + (myNode.parent == null ? "null" : myNode.parent.element) + ")_" + myNode.element;
+        return node;
     }
 
     protected Node<E> createNode(E element, Node<E> parent){
@@ -250,7 +249,7 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         /**
          *  返回false则退出遍历
          */
-        abstract boolean visit(E element);
+        public abstract boolean visit(E element);
     }
     protected static class Node<E> {
         E element;

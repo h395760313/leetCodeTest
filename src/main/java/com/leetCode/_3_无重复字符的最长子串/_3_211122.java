@@ -11,7 +11,7 @@ import java.util.Set;
  * @Author: xiehongyu
  * @Date: 2021/7/20 09:54
  */
-public class 无重复字符的最长子串_211122 {
+public class _3_211122 {
     public int lengthOfLongestSubstring(String s) {
         if (s.length() < 1) return 0;
         int start = 0, end = 0, maxLen = 0;
