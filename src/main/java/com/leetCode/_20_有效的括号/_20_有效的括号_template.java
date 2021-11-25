@@ -1,7 +1,7 @@
 package com.leetCode._20_有效的括号;
 
 import com.alibaba.fastjson.JSON;
-import com.structure.c_栈.Stack;
+import com.structure._c_栈.Stack;
 import org.junit.Test;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-import com.structure.a_动态数组.ArrayList;
+import com.structure._a_动态数组.ArrayList;
 import org.junit.Test;
 
 public class ArrayListTest {

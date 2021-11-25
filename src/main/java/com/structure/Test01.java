@@ -1,11 +1,11 @@
 package com.structure;
 
-import com.structure.b_链表.SingleCircleLinkedList;
-import com.structure.c_栈.Stack;
-import com.structure.d_队列.CircleDeque;
-import com.structure.d_队列.CircleQueue;
-import com.structure.d_队列.Deque;
-import com.structure.d_队列.Queue;
+import com.structure._b_链表.SingleCircleLinkedList;
+import com.structure._c_栈.Stack;
+import com.structure._d_队列.CircleDeque;
+import com.structure._d_队列.CircleQueue;
+import com.structure._d_队列.Deque;
+import com.structure._d_队列.Queue;
 import com.structure.inter.List;
 import org.junit.Test;
 
