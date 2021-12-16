@@ -1,6 +1,12 @@
 package msbalgorithm.sort;
 
+import sun.awt.geom.AreaOp;
+
+import java.util.Arrays;
+
 public class ArraySort {
+
+    private static Integer[] arr;
 
     /**
      * 01.选择排序
@@ -121,38 +127,43 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-
-    public Integer[] mergeSort1(Integer[] arr) {
-        int mid = arr.length >> 1;
-        int i = 0;
-        int j = mid + 1;
-        int k = 0;
-
-        Integer[] res = new Integer[arr.length];
-        while (i <= mid || j < arr.length) {
-            if (i > mid) {
-                res[k++] = arr[j++];
-            }else if (j >= arr.length) {
-                res[k++] = arr[i++];
-            }else {
-                res[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
-            }
-        }
-        return res;
+    public Integer[] mergeSort1(Integer[] arr1) {
+        int begin = 0;
+        int end = arr1.length;
+        arr = Arrays.copyOfRange(arr1, begin, end);
+        sort1(begin, end);
+        return arr;
     }
 
-    public Integer[] mergeSort2(Integer[] arr) {
-        Integer mid = arr.length >> 1;
-        Integer i = 0;
-        Integer j = mid + 1;
-        Integer k = 0;
-        Integer[] newArr = new Integer[arr.length];
-        while (i <= mid && j < arr.length) {
-            newArr[k++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
+    private void sort1(int begin, int end) {
+
+        if (end - begin < 2) return;
+
+        int mid = (begin + end) >> 1;
+        sort1(begin, mid);
+        sort1(mid, end);
+        merge1(begin, mid, end);
+    }
+
+    private void merge1(int begin, int mid, int end) {
+        int li = 0, le = mid - begin,
+                ri = mid, re = end,
+                ai = begin;
+
+        int[] leftArr = new int[arr.length >> 1];
+
+        for (int i = li; i < le; i++) {
+            leftArr[i] = arr[begin + i];
         }
-        while (i <= mid) newArr[k++] = arr[i++];
-        while (j < arr.length) newArr[k++] = arr[j++];
-        return newArr;
+
+        while (li < le) {
+            if (ri < re && leftArr[li] > arr[ri]){
+                arr[ai++] = arr[ri++];
+            }else {
+                arr[ai++] = leftArr[li++];
+             }
+        }
+
     }
 
     /**
@@ -161,8 +172,46 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public void quickSort(Integer[] arr) {
+    public Integer[] quickSort(Integer[] arr1) {
+        int begin = 0;
+        int end = arr1.length - 1;
+        arr = Arrays.copyOfRange(arr1, begin, end + 1);
 
+        quickSort(0, end);
+
+        return arr;
+    }
+
+    private void quickSort(int begin, int end) {
+        int p = begin, q = end;
+        int mid = (begin + end) >> 1;
+        // 方向  true为从左往右  false为从右往左
+        boolean dire = false;
+        int temp = arr[0];
+
+        while (begin < end) {
+
+            if (dire) {
+                // 从左往右
+                if (arr[begin] >= temp) {
+                    arr[end--] = arr[begin];
+                    dire = !dire;
+                }else {
+                    begin++;
+                }
+            }else {
+                // 从右往左
+                if (arr[end] <= temp) {
+                    arr[begin++] = arr[end];
+                    dire = !dire;
+                }else {
+                    end--;
+                }
+            }
+        }
+        arr[begin] = temp;
+        quickSort(begin, begin - 1);
+        quickSort(begin + 1, q);
     }
 
     /**
@@ -194,4 +243,5 @@ public class ArraySort {
     public void radixSort(Integer[] arr) {
 
     }
+
 }

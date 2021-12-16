@@ -7,7 +7,8 @@ import org.junit.Test;
 
 public class SortTest {
 
-    Integer[] arr = Integers.random(1000000,10000,10000000);
+//    Integer[] arr = Integers.random(100000,0,1000000);
+    Integer[] arr = {8,7,6,5,4,3,2,1};
     ArraySort arraySort = new ArraySort();
 
     @Test
@@ -37,21 +38,15 @@ public class SortTest {
 
     @Test
     public void mergeSortTest() {
-        Integer[] copy = Integers.copy(arr);
         Times.test("测试归并排序1", ()-> arraySort.mergeSort1(arr));
         Asserts.test(Integers.isAscOrder(arraySort.mergeSort1(arr)));
-        Times.test("测试归并排序2", ()-> arraySort.mergeSort2(copy));
-        Asserts.test(Integers.isAscOrder(arraySort.mergeSort2(copy)));
     }
 
-
-
-
-
-
-
-
-
+    @Test
+    public void quickSortTest() {
+        Times.test("测试归并排序1", ()-> arraySort.quickSort(arr));
+        Asserts.test(Integers.isAscOrder(arraySort.quickSort(arr)));
+    }
 
     private void sout(Integer[] ints) {
         for (Integer i : ints) {
