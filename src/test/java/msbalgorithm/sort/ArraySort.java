@@ -23,7 +23,7 @@ public class ArraySort {
                     poInteger = j;
                 }
             }
-            if (poInteger != i) swap(arr,poInteger,i);
+            if (poInteger != i) swap(arr, poInteger, i);
         }
     }
 
@@ -35,14 +35,14 @@ public class ArraySort {
      * @Date: 2021/3/5
      */
     public void selectionSort2(Integer[] arr) {
-        for (Integer begin = 0,end = arr.length - 1; end >= 0; end--) {
+        for (Integer begin = 0, end = arr.length - 1; end >= 0; end--) {
             Integer maxIndex = 0;
             for (Integer j = begin; j <= end; j++) {
                 if (arr[j] >= arr[maxIndex]) {
                     maxIndex = j;
                 }
             }
-            if (maxIndex != end) swap(arr,maxIndex,end);
+            if (maxIndex != end) swap(arr, maxIndex, end);
         }
     }
 
@@ -50,6 +50,7 @@ public class ArraySort {
     /**
      * 02.冒泡排序
      * 思路：每轮遍历将最大的放到最后，并在下次遍历中忽略此数
+     *
      * @Author: xiehy
      * @Date: 2021/3/5
      */
@@ -100,25 +101,30 @@ public class ArraySort {
      * 05.希尔排序
      * <p>
      * knuth 序列 h = h * 3 + 1
+     * 以步长做插入排序e
      *
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public void shellSort(Integer[] arr) {
-        Integer h = 1;
-        while (h < arr.length / 3) {
-            h = h * 3 + 1;
+    public Integer[] shellSort(Integer[] arr1) {
+        arr = Arrays.copyOfRange(arr1, 0, arr1.length);
+        int step = 1;
+        while (step < arr1.length / 3) {
+            step = step * 3 + 1;
         }
-        while (h >= 1) {
-            for (Integer i = h; i < arr.length; i++) {
-                for (Integer j = i; j > h - 1; j -= h) {
-                    if (arr[j] < arr[j - 1]) {
-                        swap(arr, j, j - 1);
+        while (step >= 1) {
+            for (int col = 0; col < step; col++) {
+                for (int begin = col + step; begin < arr.length; begin += step)  {
+                    int cur = begin;
+                    while (cur > col && arr[cur] < arr[cur - step]){
+                        swap(arr, cur, cur - step);
+                        cur -= step;
                     }
                 }
             }
-            h = (h - 1) / 3;
+            step = (step - 1) / 3;
         }
+        return arr;
     }
 
     /**
@@ -157,62 +163,77 @@ public class ArraySort {
         }
 
         while (li < le) {
-            if (ri < re && leftArr[li] > arr[ri]){
+            if (ri < re && leftArr[li] > arr[ri]) {
                 arr[ai++] = arr[ri++];
-            }else {
+            } else {
                 arr[ai++] = leftArr[li++];
-             }
+            }
         }
 
     }
 
     /**
      * 07.快速排序
+     * 思路：找到一个轴点，将小于轴点的元素放到轴点左边，大于轴点的元素放到轴点右边。
+     * 覆盖一次变一次方向。再根据轴点将序列分割为两个子序列继续进行快速排序
      *
      * @Author: xiehy
      * @Date: 2021/3/5
      */
     public Integer[] quickSort(Integer[] arr1) {
+        arr = Arrays.copyOfRange(arr1, 0, arr1.length);
+
         int begin = 0;
-        int end = arr1.length - 1;
-        arr = Arrays.copyOfRange(arr1, begin, end + 1);
+        int end = arr1.length;
 
-        quickSort(0, end);
-
+        quickSort(begin, end);
         return arr;
     }
 
+    /**
+     * 对序列进行快速排序
+     */
     private void quickSort(int begin, int end) {
-        int p = begin, q = end;
-        int mid = (begin + end) >> 1;
-        // 方向  true为从左往右  false为从右往左
-        boolean dire = false;
-        int temp = arr[0];
+        if (end - begin < 2) return;
 
+        // 找到轴点位置
+        int mid = pivotIndex(begin, end);
+        // 对子序列进行快速排序
+        quickSort(begin, mid);
+        quickSort(mid + 1, end);
+    }
+
+    private int pivotIndex(int begin, int end) {
+        // 随机选择一个元素与begin交换位置
+        swap(arr, begin, begin + (int) Math.random() * (end - begin));
+        // 备份轴点元素
+        int pivot = arr[begin];
+        // end指向最后一个元素
+        end--;
         while (begin < end) {
-
-            if (dire) {
-                // 从左往右
-                if (arr[begin] >= temp) {
-                    arr[end--] = arr[begin];
-                    dire = !dire;
-                }else {
-                    begin++;
-                }
-            }else {
-                // 从右往左
-                if (arr[end] <= temp) {
-                    arr[begin++] = arr[end];
-                    dire = !dire;
-                }else {
+            while (begin < end) {
+                if (pivot < arr[end]) { // 右边元素大于轴点元素
                     end--;
+                } else { // 右边元素小于轴点元素，需要覆盖，变向
+                    arr[begin++] = arr[end];
+                    break;
+                }
+            }
+
+            while (begin < end) {
+                if (pivot > arr[begin]) { // 左边元素小于轴点元素
+                    begin++;
+                } else { // 左边元素大于轴点元素，需要覆盖，变向
+                    arr[end--] = arr[begin];
+                    break;
                 }
             }
         }
-        arr[begin] = temp;
-        quickSort(begin, begin - 1);
-        quickSort(begin + 1, q);
+
+        arr[begin] = pivot;
+        return begin;
     }
+
 
     /**
      * 08.桶排序
@@ -220,7 +241,8 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public void bucketSort(Integer[] arr) {
+    public void bucketSort(Integer[] arr1) {
+        arr = Arrays.copyOfRange(arr1, 0, arr1.length);
 
     }
 
@@ -230,8 +252,42 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public void countingSort(Integer[] arr) {
+    public Integer[] countingSort1(Integer[] arr1) {
+        arr = Arrays.copyOfRange(arr1, 0, arr1.length);
+        // 构建用于存放每个元素出现次数的新数组
+        int max = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) max = arr[i];
+        }
+        int[] counts = new int[1 + max];
 
+
+        for (int i = 0; i < arr.length; i++) {
+            counts[arr[i]]++;
+        }
+
+        int index = 0;
+        for (int i = 0; i < counts.length; i++) {
+            while (counts[i]-- > 0) {
+                arr[index++] = counts[i];
+            }
+        }
+        return arr;
+    }
+
+    public Integer[] countingSort2(Integer[] arr1) {
+        arr = Arrays.copyOfRange(arr1, 0, arr1.length);
+        // 构建新数组
+        int min = arr[0], max = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        return arr;
     }
 
     /**
@@ -240,7 +296,8 @@ public class ArraySort {
      * @Author: xiehy
      * @Date: 2021/3/5
      */
-    public void radixSort(Integer[] arr) {
+    public void radixSort(Integer[] arr1) {
+        arr = Arrays.copyOfRange(arr1, 0, arr1.length);
 
     }
 

@@ -99,7 +99,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
                 root = replaceNode;
             }else if (node == node.parent.left) { // 表示被删除节点是度为1的parent的左子节点
                 node.parent.left = replaceNode;
-            } else { // node == node.parent.right 表示被删除节点是度为1的parent的右子节点
+            } else { // node == node.parents.right 表示被删除节点是度为1的parent的右子节点
                 node.parent.right = replaceNode;
             }
 
@@ -108,7 +108,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
                 root = null;
             } else if (node == node.parent.left) { // 表示叶子节点并且是左子节点
                 node.parent.left = replaceNode;
-            } else { // node == node.parent.right 表示叶子节点并且是右子节点
+            } else { // node == node.parents.right 表示叶子节点并且是右子节点
                 node.parent.right = replaceNode;
             }
         }
@@ -379,7 +379,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return pre;
         }
 
-        // 从祖父节点找前驱节点 node = parent.parent.parent... 直到节点为父节点的右节点停止
+        // 从祖父节点找前驱节点 node = parents.parents.parents... 直到节点为父节点的右节点停止
         while (node.parent != null && node == node.parent.left) {
             node = node.parent;
         }
@@ -400,7 +400,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return post;
         }
 
-        // 从祖父节点找前驱节点 node = parent.parent.parent... 直到节点为父节点的左节点停止
+        // 从祖父节点找前驱节点 node = parents.parents.parents... 直到节点为父节点的左节点停止
         while (node.parent != null && node == node.parent.right) {
             node = node.parent;
         }

@@ -191,7 +191,7 @@ public class BinaryTree<E> implements BinaryTreeInfo {
             return pre;
         }
 
-        // 从祖父节点找前驱节点 node = parent.parent.parent... 直到节点为父节点的右节点停止
+        // 从祖父节点找前驱节点 node = parents.parents.parents... 直到节点为父节点的右节点停止
         while (node.parent != null && node == node.parent.left) {
             node = node.parent;
         }
@@ -212,7 +212,7 @@ public class BinaryTree<E> implements BinaryTreeInfo {
             return post;
         }
 
-        // 从祖父节点找前驱节点 node = parent.parent.parent... 直到节点为父节点的左节点停止
+        // 从祖父节点找前驱节点 node = parents.parents.parents... 直到节点为父节点的左节点停止
         while (node.parent != null && node == node.parent.right) {
             node = node.parent;
         }

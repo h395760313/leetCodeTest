@@ -33,7 +33,9 @@ public class SortTest {
     @Test
     public void shellSortTest() {
         Times.test("测试希尔排序", ()-> arraySort.shellSort(arr));
-        Asserts.test(Integers.isAscOrder(arr));
+        Asserts.test(Integers.isAscOrder(arraySort.shellSort(arr)));
+        Integer[] integers = arraySort.shellSort(arr);
+        sout(integers);
     }
 
     @Test
@@ -46,6 +48,12 @@ public class SortTest {
     public void quickSortTest() {
         Times.test("测试归并排序1", ()-> arraySort.quickSort(arr));
         Asserts.test(Integers.isAscOrder(arraySort.quickSort(arr)));
+    }
+
+    @Test
+    public void countingSortTest() {
+        Times.test("测试计数排序1", ()-> arraySort.countingSort2(arr));
+        Asserts.test(Integers.isAscOrder(arraySort.countingSort2(arr)));
     }
 
     private void sout(Integer[] ints) {
