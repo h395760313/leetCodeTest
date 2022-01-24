@@ -10,10 +10,24 @@ import org.junit.Test;
  */
 public class _10_正则表达式匹配_template {
 
+    public boolean isMatch(String s, String p) {
+        int sIndex = 0, pIndex = 0;
+        int len = Math.min(s.length(), p.length());
+        return isMatch(s, p, sIndex, pIndex, len);
+    }
 
+    public boolean isMatch(String s, String p, int sIndex, int pIndex, int len) {
+        if (sIndex >= s.length() || pIndex >= p.length()) {
+
+        }
+        if (s.charAt(sIndex) == p.charAt(pIndex)) {
+            isMatch(s, p, sIndex + 1, pIndex + 1, len);
+        }
+        return false;
+    }
 
     @Test
     public void test() {
-        System.out.println(JSON.toJSONString(null));
+        System.out.println(JSON.toJSONString(isMatch("aa", "a")));
     }
 }

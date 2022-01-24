@@ -14,21 +14,24 @@ import java.util.Set;
 public class _3_220105 {
     public int lengthOfLongestSubstring(String s) {
         int maxLen = 0;
-        for (int i = 0; i < s.length(); i++) {
-            Set<Character> set = new HashSet<>();
-            set.add(s.charAt(i));
-            for (int j = i + 1; j < s.length(); j++) {
-                if (set.contains(s.charAt(j))) break;
-                set.add(s.charAt(j));
+        int left = 0;
+        int right = 0;
+        HashSet set = new HashSet();
+        while (right < s.length()) {
+            char newChar = s.charAt(right);
+            if (set.contains(newChar)) {
+                set.remove(s.charAt(left++));
+            }else {
+                set.add(newChar);
+                maxLen = Math.max(maxLen, set.size());
+                right++;
             }
-            System.out.println(set.size());
-            maxLen = Math.max(maxLen, set.size());
         }
         return maxLen;
     }
 
     @Test
     public void test() {
-        System.out.println(lengthOfLongestSubstring(" "));
+        System.out.println(lengthOfLongestSubstring("abcabcbb"));
     }
 }
