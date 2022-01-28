@@ -9,7 +9,7 @@ import org.junit.Test;
  * @author xiehongyu
  * @date 2022/01/06 17:12
  */
-public class _35_搜索插入位置 {
+public class _35_搜索插入位置_template {
 
     public int searchInsert(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
