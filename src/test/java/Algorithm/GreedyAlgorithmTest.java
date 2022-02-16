@@ -1,7 +1,5 @@
 package Algorithm;
 
-import com.algorithm.GreedyAlgorithm;
-import com.algorithm.GreedyAlgorithm2;
 import org.junit.Test;
 
 

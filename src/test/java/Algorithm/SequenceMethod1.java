@@ -1,7 +1,7 @@
 package Algorithm;
 
 
-import com.leetCode.common.ListNode;
+import com.algorithm.leetCode.common.ListNode;
 import java.util.*;
 
 public class SequenceMethod1 {
