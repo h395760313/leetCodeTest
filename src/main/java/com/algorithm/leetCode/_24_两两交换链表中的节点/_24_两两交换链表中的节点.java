@@ -5,18 +5,18 @@ import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 /**
+ * https://leetcode-cn.com/problems/swap-nodes-in-pairs/
  * @author xiehongyu
  * @date 2022/02/16 16:56
  */
 public class _24_两两交换链表中的节点 {
 
     public ListNode swapPairs(ListNode head) {
-        if (head == null || head.next != null) return head;
-        ListNode curr = head;
-        while (curr != null || curr.next != null) {
-
-        }
-        return null;
+        if (head == null || head.next == null) return head;
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
+        return next;
     }
 
     @Test
