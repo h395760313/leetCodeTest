@@ -1,6 +1,5 @@
 package com.algorithm.structure.kmp;
 
-import com.alibaba.fastjson.JSON;
 
 /**
  * @author xiehongyu
@@ -12,7 +11,6 @@ public class KMP {
         String str1 = "sgdshfgshsgFsfsdfasabbtabbecabbtabbfsgafagfasfasdfsadfasf";
         String str2 = "abbtabbecabbtabbf";
         // -1 0 0
-//        String str = "abac";
         System.out.println(kmp(str1, str2));
     }
 
@@ -43,13 +41,20 @@ public class KMP {
         if (str1.length() < str2.length()){
             return -1;
         }
-        getNextArr(str2);
+        int[] nextArr = getNextArr(str2);
 
         int i1 = 0;
         int i2 = 0;
         while (i1 < str1.length() && i2 < str2.length()) {
-
+            if (str1.charAt(i1) == str2.charAt(i2)) {
+                i1++;
+                i2++;
+            }else if (0 == i2) {
+                i1++;
+            }else {
+                i2 = nextArr[i2];
+            }
         }
-        return -1;
+        return i2 == str2.length() ? i1 - str2.length() : -1;
     }
 }
