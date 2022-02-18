@@ -49,12 +49,12 @@ public class KMP {
             if (str1.charAt(i1) == str2.charAt(i2)) {
                 i1++;
                 i2++;
-            }else if (0 == i2) {
+            }else if (nextArr[i2] == -1) {
                 i1++;
             }else {
                 i2 = nextArr[i2];
             }
         }
-        return i2 == str2.length() ? i1 - str2.length() : -1;
+        return i2 == str2.length() ? i1 - i2 : -1;
     }
 }
