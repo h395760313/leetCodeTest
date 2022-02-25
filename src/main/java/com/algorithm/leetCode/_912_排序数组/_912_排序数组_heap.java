@@ -15,20 +15,32 @@ public class _912_排序数组_heap {
         return nums;
     }
 
-
     public void heapSort(int[] nums){
-
+        for (int i = 0; i < nums.length; i++) {
+            heapInsert(nums, i);
+        }
+        System.out.println(JSON.toJSONString(nums));
     }
 
     public void heapInsert(int[] nums, int index){
-        while (nums[index] > nums[(index - 1) >> 1]) {
-            swap(nums, index, (index - 1) >> 1);
-            index = (index - 1) >> 1;
+        while (nums[index] > nums[(index - 1) / 2]) {
+            swap(nums, index, (index - 1) / 2);
+            index = (index - 1) / 2;
         }
     }
 
     public void heapify(int[] nums, int index, int heapSize){
+        int left = index * 2 + 1;
+        int largest = 0;
+        while (left < heapSize) {
+            // 有子树
+            largest = left + 1 < heapSize && nums[left] > nums[left + 1] ? left : left + 1;
+            largest = nums[largest] > nums[index] ? largest : index;
+            if (largest == index) {
+                break;
+            }
 
+        }
     }
 
 
