@@ -9,7 +9,7 @@ import org.junit.Test;
  * @author xiehongyu
  * @date 2022/02/16 16:56
  */
-public class _24_两两交换链表中的节点 {
+public class _24_两两交换链表中的节点_template {
 
     public ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null) return head;

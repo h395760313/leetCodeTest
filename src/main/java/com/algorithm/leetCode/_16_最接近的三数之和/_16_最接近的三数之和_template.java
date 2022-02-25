@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author xiehongyu
  * @date 2022/1/22 10:03
  */
-public class _16_最接近的三数之和 {
+public class _16_最接近的三数之和_template {
 
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
