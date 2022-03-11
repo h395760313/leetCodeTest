@@ -12,6 +12,11 @@
       <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="llgroup-ll-packages-production" />
       <option name="name" value="production" />
       <option name="url" value="https://llgroup-maven.pkg.coding.net/repository/ll-packages/production/" />

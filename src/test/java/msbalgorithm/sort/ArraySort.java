@@ -8,13 +8,9 @@ public class ArraySort {
 
     private static Integer[] arr;
 
-    /**
-     * 01.选择排序
-     * 循环遍历选最小放前面 指针指向最小数
-     *
-     * @Author: xiehy
-     * @Date: 2021/3/5
-     */
+    /**********************************------01.选择排序.start------**********************************/
+
+    //循环遍历选最小放前面 指针指向最小数
     public void selectionSort1(Integer[] arr) {
         for (Integer i = 0; i < arr.length - 1; i++) {
             Integer poInteger = i;
@@ -27,13 +23,7 @@ public class ArraySort {
         }
     }
 
-    /**
-     * 01.选择排序
-     * 循环遍历选最大放后面 指针指向最大数
-     *
-     * @Author: xiehy
-     * @Date: 2021/3/5
-     */
+    //循环遍历选最大放后面 指针指向最大数
     public void selectionSort2(Integer[] arr) {
         for (Integer begin = 0, end = arr.length - 1; end >= 0; end--) {
             Integer maxIndex = 0;
@@ -45,15 +35,12 @@ public class ArraySort {
             if (maxIndex != end) swap(arr, maxIndex, end);
         }
     }
+    /**********************************------01.选择排序.end------**********************************/
 
 
-    /**
-     * 02.冒泡排序
-     * 思路：每轮遍历将最大的放到最后，并在下次遍历中忽略此数
-     *
-     * @Author: xiehy
-     * @Date: 2021/3/5
-     */
+    /**********************************------02.冒泡排序.start------**********************************/
+
+    // 思路：每轮遍历将最大的放到最后，并在下次遍历中忽略此数
     public void bubbleSort(Integer[] arr) {
         for (Integer i = 0; i < arr.length; i++) {
             for (Integer j = 0; j < arr.length - i - 1; j++) {
@@ -63,14 +50,13 @@ public class ArraySort {
             }
         }
     }
+    /**********************************------02.冒泡排序.end------**********************************/
 
-    /**
-     * 03.插入排序
-     *
-     * @Author: xiehy
-     * @Date: 2021/3/5
-     */
-    public void insertionSort(Integer[] arr) {
+
+    /**********************************------03.插入排序.start------**********************************/
+    // 思路：可看做是手抓一副扑克牌
+    // 待插入数每次与前者比较，如果大于前者则交换，直到不大于前者停止，继续下一个元素
+    public void insertionSort1(Integer[] arr) {
         for (Integer i = 1; i < arr.length; i++) {
             Integer j = i;
             while (j >= 1 && arr[j] < arr[j - 1]) {
@@ -79,6 +65,49 @@ public class ArraySort {
             }
         }
     }
+
+    /**
+     * 插入排序优化
+     * 思路：
+     * 先将待插入的数据备份
+     * 前面有比待插入数大的向后挪动一个位置
+     * 将待插入数插入合适的位置
+     */
+    public void insertionSort2(Integer[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int j = i;
+            int cmp = arr[i];
+            while (j > 0 && cmp < arr[j - 1]) {
+                arr[j] = arr[j - 1];
+                j --;
+            }
+            arr[j] = cmp;
+        }
+    }
+
+    public void insertionSort(Integer[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+            int j = i;
+            int index = i;
+            int cmp = arr[i];
+            int begin = 0, end = i;
+            while (begin < end) {
+                int mid = (begin + end) >> 1;
+                if (arr[mid] < cmp) {
+                    end = mid;
+                } else {
+                     begin = end + 1;
+                }
+            }
+            // 找到比cmp小
+            while (j > 0 && cmp < arr[j - 1]) {
+                arr[j] = arr[j - 1];
+                j --;
+            }
+            arr[j] = cmp;
+        }
+    }
+    /**********************************------03.插入排序.end------**********************************/
 
     private void swap(Integer[] arr, Integer a, Integer b) {
         Integer temp = arr[a];
@@ -125,6 +154,23 @@ public class ArraySort {
             step = (step - 1) / 3;
         }
         return arr;
+    }
+
+    public void shellSort2(Integer[] arr) {
+        Integer h = 1;
+        while (h < arr.length / 3) {
+            h = h * 3 + 1;
+        }
+        while (h >= 1) {
+            for (Integer i = h; i < arr.length; i++) {
+                for (Integer j = i; j > h - 1; j -= h) {
+                    if (arr[j] < arr[j - 1]) {
+                        swap(arr, j, j - 1);
+                    }
+                }
+            }
+            h = (h - 1) / 3;
+        }
     }
 
     /**
