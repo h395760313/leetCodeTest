@@ -1,7 +1,5 @@
 package com.tools;
 
-import sun.tools.jconsole.Worker;
-
 /**
  * 雪花算法 snowflake
  * @author xiehongyu

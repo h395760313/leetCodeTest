@@ -1,4 +1,4 @@
-package com.leetCode;
+package com.algorithm.leetCode._643_子数组最大平均数I;
 
 import org.junit.Test;
 

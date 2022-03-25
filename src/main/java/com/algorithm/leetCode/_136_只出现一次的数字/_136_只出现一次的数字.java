@@ -1,4 +1,4 @@
-package com.leetCode;
+package com.algorithm.leetCode._136_只出现一次的数字;
 
 import org.junit.Test;
 

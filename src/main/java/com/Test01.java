@@ -4,10 +4,7 @@ import com.model.Person;
 import com.tools.Times;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.*;
 
 public class Test01 {
     @Test
@@ -64,5 +61,33 @@ public class Test01 {
         return fib(n - 1, res2, res1 + res2);
     }
 
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int count = in.nextInt();
+        String[] arr = new String[count];
+        for(int i = 0; i < count; i++) {
+            arr[i] = in.next();
+        }
+
+        Arrays.sort(arr, (o1, o2) -> {
+            int index = 0;
+            while (index < o1.length() && index < o2.length()) {
+                char c1 = o1.charAt(index);
+                char c2 = o2.charAt(index);
+                if (c1 == c2) {
+                    index++;
+                    continue;
+                }
+                return (int)c1 - (int)c2;
+            }
+            if (index == o1.length() && index != o2.length()) return -1;
+            else if (index != o1.length() && index == o2.length()) return 1;
+            return 0;
+        });
+
+        for(int i = 0; i < count; i++) {
+            System.out.println(arr[i]);
+        }
+    }
 
 }
