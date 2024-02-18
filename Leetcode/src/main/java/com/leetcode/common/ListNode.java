@@ -1,4 +1,4 @@
-package com.algorithm.leetCode.common;
+package com.leetcode.common;
 
 
 public class ListNode {

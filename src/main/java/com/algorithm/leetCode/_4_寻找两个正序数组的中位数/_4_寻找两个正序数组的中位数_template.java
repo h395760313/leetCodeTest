@@ -14,23 +14,7 @@ import java.util.Arrays;
 public class _4_寻找两个正序数组的中位数_template {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int len = nums1.length + nums2.length;
-        int[] newArr = new int[len];
-        /*while (p < nums1.length || q < nums2.length) {
-            if (p < nums1.length && (q >= nums2.length || nums1[p] < nums2[q])) {
-                newArr[index] = nums1[p];
-                p++;
-            }else {
-                newArr[index] = nums2[q];
-                q++;
-            }
-            index++;
-        }*/
-        System.arraycopy(nums1,0,newArr,0, nums1.length);
-        System.arraycopy(nums2,0,newArr,nums1.length, nums2.length);
-        Arrays.sort(newArr);
-        System.out.println(JSON.toJSONString(newArr));
-        return len % 2 == 0 ? (double) (newArr[len / 2] + newArr[len / 2 - 1]) /2 : newArr[len / 2];
+        return 0;
     }
 
     @Test
