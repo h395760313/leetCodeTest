@@ -1,4 +1,4 @@
-package com.leetcode.sort;
+package com.leetcode.leftgod.sort;
 
 import org.junit.Test;
 
@@ -8,24 +8,23 @@ import java.util.Arrays;
  * @author xiehongyu
  * @date 2024/3/9 16:39
  */
-public class BubbleSort {
+public class InsertionSort {
 
-    public void bubbleSort(int[] nums){
-        for (int i = nums.length - 1; i >= 0 ; --i) {
-            for (int j = i-1; j >= 0; --j) {
-                if (nums[i] < nums[j]) {
-                    swap(nums, i ,j);
+    public void insertionSort(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i; j > 0; --j) {
+                if (nums[j] < nums[j - 1]) {
+                    swap(nums, j, j - 1);
                 }
             }
         }
     }
 
-    private void swap(int[] nums, int i, int j){
+    private void swap(int[] nums, int i, int j) {
         nums[i] = nums[i] ^ nums[j];
         nums[j] = nums[i] ^ nums[j];
         nums[i] = nums[i] ^ nums[j];
     }
-
 
     @Test
     public void test() {
@@ -35,10 +34,10 @@ public class BubbleSort {
             int maxNum = 100;
             int[] nums = new int[maxCount];
             for (int j = 0; j < maxCount; j++) {
-                nums[j] = (int)(Math.random() * maxNum) - (int)(Math.random() * maxNum);
+                nums[j] = (int) (Math.random() * maxNum) - (int) (Math.random() * maxNum);
             }
             int[] originNums = Arrays.copyOf(nums, nums.length);
-            bubbleSort(nums);
+            insertionSort(nums);
             Validator.validSort(originNums, nums);
         }
     }

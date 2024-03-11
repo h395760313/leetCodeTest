@@ -1,4 +1,4 @@
-package com.leetcode.sort;
+package com.leetcode.leftgod.sort;
 
 import org.junit.Test;
 
