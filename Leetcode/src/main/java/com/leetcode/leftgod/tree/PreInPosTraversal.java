@@ -3,6 +3,8 @@ package com.leetcode.leftgod.tree;
 import com.leetcode.common.TreeNode;
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -52,6 +54,7 @@ public class PreInPosTraversal {
      * 3）将右节点压栈
      * 4）将左节点压栈
      * 5）循环2）
+     *
      * @author xiehongyu
      * @date 2024/3/13 16:20
      */
@@ -131,6 +134,27 @@ public class PreInPosTraversal {
         }
     }
 
+    /**
+     * 顺序遍历
+     *
+     * @author xiehongyu
+     * @date 2024/3/13 16:41
+     */
+    public void sequenceTraversal(TreeNode head) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(head);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            System.out.print(node.val + "_");
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+            }
+        }
+    }
+
     @Test
     public void test() {
         TreeNode node = new TreeNode(1);
@@ -152,5 +176,7 @@ public class PreInPosTraversal {
         posOrderRecur(node);
         System.out.println("\n后序：");
         posOrderUnRecur(node);
+        System.out.println("\n顺序：");
+        sequenceTraversal(node);
     }
 }
