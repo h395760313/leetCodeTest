@@ -7,6 +7,7 @@ import java.util.Stack;
 
 /**
  * Binary Search Tree —— 二叉搜索树
+ *
  * @Author: xiehongyu
  * @Date: 2024/03/13 18:47
  */
@@ -17,10 +18,11 @@ public class TestBST {
     /**
      * 判断一棵二叉树是否搜索二叉树
      * 搜索二叉树：每棵子树的左树上的所有节点的数都小于头节点
+     *
      * @Author: xiehongyu
      * @Date: 2024/3/13 18:52
      */
-    public boolean isBST(TreeNode head){
+    public boolean isBST(TreeNode head) {
         if (head == null) {
             return true;
         }
@@ -30,13 +32,13 @@ public class TestBST {
         }
         if (head.val <= preValue) {
             return false;
-        }else {
+        } else {
             preValue = head.val;
         }
         return isBST(head.right);
     }
 
-    public boolean isBST2(TreeNode head){
+    public boolean isBST2(TreeNode head) {
         if (head == null) {
             return true;
         }
@@ -46,11 +48,11 @@ public class TestBST {
             if (head != null) {
                 stack.push(head);
                 head = head.left;
-            }else {
+            } else {
                 TreeNode node = stack.pop();
                 if (node.val <= preValue) {
                     return false;
-                }else {
+                } else {
                     preValue = node.val;
                 }
                 head = node.right;
@@ -58,6 +60,51 @@ public class TestBST {
         }
         return true;
     }
+
+    class Info {
+        private boolean isBst;
+        private int min;
+        private int max;
+
+        public Info(boolean isBst, int min, int max) {
+            this.isBst = isBst;
+            this.min = min;
+            this.max = max;
+        }
+    }
+
+    public boolean isBST3(TreeNode head) {
+        return process(head).isBst;
+    }
+
+    public Info process(TreeNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        Info leftInfo = process(head.left);
+        Info rightInfo = process(head.right);
+        int min = head.val;
+        int max = head.val;
+        if (leftInfo != null) {
+            min = Math.min(min, leftInfo.min);
+            max = Math.max(max, leftInfo.max);
+        }
+        if (rightInfo != null) {
+            min = Math.min(min, rightInfo.min);
+            max = Math.max(max, rightInfo.max);
+        }
+
+        boolean isBST = true;
+        if (leftInfo != null && (!leftInfo.isBst || leftInfo.max >= head.val)) {
+            isBST = false;
+        }
+        if (rightInfo != null && (!rightInfo.isBst || rightInfo.min <= head.val)) {
+            isBST = false;
+        }
+        return new Info(isBST, min, max);
+    }
+
 
     @Test
     public void test() {
@@ -71,6 +118,6 @@ public class TestBST {
         node.left.left.left = new TreeNode(1);
 
 
-        System.out.println(isBST(node));
+        System.out.println(isBST3(node));
     }
 }
