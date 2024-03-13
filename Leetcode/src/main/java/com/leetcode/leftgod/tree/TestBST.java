@@ -3,7 +3,10 @@ package com.leetcode.leftgod.tree;
 import com.leetcode.common.TreeNode;
 import org.junit.Test;
 
+import java.util.Stack;
+
 /**
+ * Binary Search Tree —— 二叉搜索树
  * @Author: xiehongyu
  * @Date: 2024/03/13 18:47
  */
@@ -32,6 +35,30 @@ public class TestBST {
         }
         return isBST(head.right);
     }
+
+    public boolean isBST2(TreeNode head){
+        if (head == null) {
+            return true;
+        }
+        int preValue = Integer.MIN_VALUE;
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || head != null) {
+            if (head != null) {
+                stack.push(head);
+                head = head.left;
+            }else {
+                TreeNode node = stack.pop();
+                if (node.val <= preValue) {
+                    return false;
+                }else {
+                    preValue = node.val;
+                }
+                head = node.right;
+            }
+        }
+        return true;
+    }
+
     @Test
     public void test() {
         TreeNode node = new TreeNode(5);
