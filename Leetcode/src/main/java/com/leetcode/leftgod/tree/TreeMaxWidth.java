@@ -57,6 +57,37 @@ public class TreeMaxWidth {
         return max;
     }
 
+    public int treeMaxWidthWithoutMap(TreeNode head) {
+        if (head == null) {
+            return 0;
+        }
+        int max = -1;
+        TreeNode curEnd = head;
+        TreeNode nextEnd = null;
+        int curLevelCount = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(head);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.left != null) {
+                queue.add(node.left);
+                nextEnd = node.left;
+            }
+            if (node.right != null) {
+                queue.add(node.right);
+                nextEnd = node.right;
+            }
+            curLevelCount++;
+            if (node == curEnd) {
+                max = Math.max(max, curLevelCount);
+                curEnd = nextEnd;
+                nextEnd = null;
+            }
+        }
+
+        return max;
+    }
+
     @Test
     public void test() {
         TreeNode node = new TreeNode(1);
@@ -74,6 +105,6 @@ public class TreeMaxWidth {
         node.right.right.right = new TreeNode(12);
         node.right.right.right.right = new TreeNode(13);
 
-        System.out.println(treeMaxWidth(node));
+        System.out.println(treeMaxWidthWithoutMap(node));
     }
 }
