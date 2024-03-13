@@ -43,8 +43,17 @@ public class PreInPosTraversal {
     }
 
 
+    // +++++++非递归方式 前、中、后序遍历++++++
+
     /**
-     * 非递归方式 前、中、后序遍历
+     * 非递归前序遍历
+     * 1）先将头节点压入栈
+     * 2）弹出则打印
+     * 3）将右节点压栈
+     * 4）将左节点压栈
+     * 5）循环2）
+     * @author xiehongyu
+     * @date 2024/3/13 16:20
      */
     public void preOrderUnRecur(TreeNode head) {
         if (head == null) {
@@ -67,8 +76,11 @@ public class PreInPosTraversal {
     /**
      * 中序遍历
      * 1）先将所有左节点压入栈
-     * 2）弹出时打印
-     * 3）将弹出节点的所有左节点压入栈
+     * 2）如果栈不为空并且指针指向空——说明已将所有左节点压入栈，弹出栈顶元素并打印，寻找元素的右节点，指针指向右节点
+     * 3）如果栈不为空且指针指向非空，说明指针到了右节点，将此节点所有的左节点压入栈
+     * 4）如果栈为空且指针指向非空，说明指针指向了头节点，即哪个头节点右树的所有左节点压入栈
+     * 5）循环2）、3）、4）直到栈空、指针指向空
+     *
      * @param head
      */
     public void inOrderUnRecur(TreeNode head) {
@@ -80,7 +92,7 @@ public class PreInPosTraversal {
             if (head != null) {
                 stack.push(head);
                 head = head.left;
-            }else {
+            } else {
                 head = stack.pop();
                 System.out.print(head.val + "_");
                 head = head.right;
