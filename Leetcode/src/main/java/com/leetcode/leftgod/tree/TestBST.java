@@ -71,6 +71,6 @@ public class TestBST {
         node.left.left.left = new TreeNode(1);
 
 
-        System.out.println(isBST(node)); // 5
+        System.out.println(isBST(node));
     }
 }
