@@ -1,4 +1,4 @@
-package com.leetcode.leftgod.sort.linked;
+package com.leetcode.leftgod.linked;
 
 import com.leetcode.common.ListNode;
 import org.junit.Test;
@@ -27,11 +27,17 @@ public class FindFirstNode {
     }
 
     public ListNode findFirstIntersectNode2(ListNode head){
+        if (head == null || head.next == null || head.next.next == null) {
+            return null;
+        }
         // 快慢指针
         ListNode n1 = head.next;
         ListNode n2 = head.next.next;
         // 找到第一次相遇节点
         while (n1 != n2) {
+            if (n1.next == null || n2.next == null) {
+                return null;
+            }
             n1 = n1.next;
             n2 = n2.next.next;
         }

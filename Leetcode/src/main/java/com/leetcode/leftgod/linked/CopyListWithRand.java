@@ -1,4 +1,4 @@
-package com.leetcode.leftgod.sort.linked;
+package com.leetcode.leftgod.linked;
 
 import com.leetcode.common.ListNode1;
 import org.junit.Test;
