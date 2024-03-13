@@ -82,6 +82,7 @@ public class TreeMaxWidth {
                 max = Math.max(max, curLevelCount);
                 curEnd = nextEnd;
                 nextEnd = null;
+                curLevelCount = 0;
             }
         }
 
@@ -105,6 +106,6 @@ public class TreeMaxWidth {
         node.right.right.right = new TreeNode(12);
         node.right.right.right.right = new TreeNode(13);
 
-        System.out.println(treeMaxWidthWithoutMap(node));
+        System.out.println(treeMaxWidthWithoutMap(node)); // 5
     }
 }
