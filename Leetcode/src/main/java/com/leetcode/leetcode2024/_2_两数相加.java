@@ -35,6 +35,40 @@ public class _2_两数相加 {
         return res.next;
     }
 
+    /**
+     * 两数相减
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode subTwoNumber(ListNode l1, ListNode l2) {
+        ListNode node = new ListNode();
+        ListNode temp = node;
+        int flag = 0;
+        while (l1 != null || l2 != null) {
+            int x = l1 == null ? 0 : l1.val;
+            int y = l2 == null ? 0 : l2.val;
+            int sub = x - y;
+            flag = sub < 0 ? -1 : 0;
+            temp.next = new ListNode(Math.abs(sub));
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+            temp = temp.next;
+        }
+        ListNode res;
+        if (flag < 0) {
+            res = new ListNode(flag);
+            res.next = node.next;
+            return res;
+        }
+        res = node;
+        return res.next;
+    }
+
     @Test
     public void test() {
         ListNode listNode1 = new ListNode(2);
