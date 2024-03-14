@@ -2,6 +2,7 @@ package com.leetcode.common;
 
 public class TreeNode {
     public int val;
+    public TreeNode parent;
     public TreeNode left;
     public TreeNode right;
 
