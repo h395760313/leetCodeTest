@@ -42,18 +42,11 @@ public class Kruskal {
         }
     }
 
-    static class EdgeComparator implements Comparator<Edge> {
-        @Override
-        public int compare(Edge o1, Edge o2) {
-            return o1.weight - o2.weight;
-        }
-    }
-
     public java.util.Set<Edge> kruskalMST(Graph graph) {
         Map<Integer, Node> nodes = graph.nodes;
         Set<Node> set = new Set<>(nodes.values());
         java.util.Set<Edge> result = new HashSet<>();
-        PriorityQueue<Edge> queue = new PriorityQueue<>(new EdgeComparator());
+        PriorityQueue<Edge> queue = new PriorityQueue<>(new Edge.EdgeComparator());
         queue.addAll(graph.edges);
         while (!queue.isEmpty()) {
             Edge edge = queue.poll();
