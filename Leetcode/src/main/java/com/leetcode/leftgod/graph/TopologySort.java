@@ -48,8 +48,7 @@ public class TopologySort {
                 {1, 2, 1}, {1, 3, 1},
                 {2, 3, 1}, {2, 4, 1},
                 {3, 4, 1}};
-        GraphGenerator graphGenerator = new GraphGenerator();
-        Graph graph = graphGenerator.createGraph(arr);
+        Graph graph = GraphGenerator.createGraph(arr);
         List<Node> nodes = sortedTopology(graph);
         for (Node node : nodes) {
             System.out.print(node.val + "_");

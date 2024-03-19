@@ -6,11 +6,12 @@ import org.junit.Test;
  * @author xiehongyu
  * @date 2024/3/14 14:18
  */
+
 public class Edge {
 
-    int weight;
-    Node from;
-    Node to;
+    public int weight;
+    public Node from;
+    public Node to;
 
     public Edge(int weight, Node from, Node to) {
         this.weight = weight;
@@ -18,8 +19,8 @@ public class Edge {
         this.to = to;
     }
 
-    @Test
-    public void test() {
-        System.out.println();
+    @Override
+    public String toString() {
+        return from + "_" + weight + "_" + to;
     }
 }

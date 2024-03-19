@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class GraphGenerator {
 
-    public Graph createGraph(Integer[][] matrix) {
+    public static Graph createGraph(Integer[][] matrix) {
         Graph graph = new Graph();
         for (int i = 0; i < matrix.length; i++) {
             int from = matrix[i][0];

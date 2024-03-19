@@ -20,9 +20,4 @@ public class Graph {
         this.nodes = new HashMap<>();
         this.edges = new HashSet<>();
     }
-
-    @Test
-    public void test() {
-        System.out.println();
-    }
 }
