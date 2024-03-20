@@ -17,7 +17,7 @@ public class PreInPosTraversal {
     /**
      * 递归方式 前、中、后序遍历
      */
-    public void preOrderRecur(TreeNode head) {
+    public static void preOrderRecur(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -26,7 +26,7 @@ public class PreInPosTraversal {
         preOrderRecur(head.right);
     }
 
-    public void inOrderRecur(TreeNode head) {
+    public static void inOrderRecur(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -35,7 +35,7 @@ public class PreInPosTraversal {
         inOrderRecur(head.right);
     }
 
-    public void posOrderRecur(TreeNode head) {
+    public static void posOrderRecur(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -58,7 +58,7 @@ public class PreInPosTraversal {
      * @author xiehongyu
      * @date 2024/3/13 16:20
      */
-    public void preOrderUnRecur(TreeNode head) {
+    public static void preOrderUnRecur(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -86,7 +86,7 @@ public class PreInPosTraversal {
      *
      * @param head
      */
-    public void inOrderUnRecur(TreeNode head) {
+    public static void inOrderUnRecur(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -112,7 +112,7 @@ public class PreInPosTraversal {
      *
      * @param head
      */
-    public void posOrderUnRecur(TreeNode head) {
+    public static void posOrderUnRecur(TreeNode head) {
         if (head == null) {
             return;
         }
@@ -140,7 +140,7 @@ public class PreInPosTraversal {
      * @author xiehongyu
      * @date 2024/3/13 16:41
      */
-    public void sequenceTraversal(TreeNode head) {
+    public static void sequenceTraversal(TreeNode head) {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(head);
         while (!queue.isEmpty()) {
@@ -157,13 +157,19 @@ public class PreInPosTraversal {
 
     @Test
     public void test() {
-        TreeNode node = new TreeNode(1);
-        node.left = new TreeNode(2);
-        node.right = new TreeNode(3);
-        node.left.left = new TreeNode(4);
-        node.left.right = new TreeNode(5);
-        node.right.left = new TreeNode(6);
+        TreeNode node = new TreeNode(3);
+        node.left = new TreeNode(9);
+        node.right = new TreeNode(20);
+        node.left.left = new TreeNode(7);
+        node.left.right = new TreeNode(6);
+        node.right.left = new TreeNode(15);
         node.right.right = new TreeNode(7);
+        node.left.right.left = new TreeNode(5);
+        node.left.right.right = new TreeNode(11);
+        node.right.left.right = new TreeNode(10);
+        node.right.right.left = new TreeNode(1);
+        node.right.right.right = new TreeNode(2);
+
         System.out.println("\n前序：");
         preOrderRecur(node);
         System.out.println("\n前序：");
