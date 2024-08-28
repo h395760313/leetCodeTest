@@ -4,8 +4,6 @@ package com.leetcode.leetcode2024;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
-import java.util.StringJoiner;
-
 /**
  * https://leetcode-cn.com/problems/longest-palindromic-substring/
  *
@@ -15,38 +13,30 @@ import java.util.StringJoiner;
 public class _5_最长回文子串 {
 
     public String longestPalindrome(String s) {
-        if (s.length() < 2) {
-            return s;
-        }
+        String str = fillStr(s, "#");
+        int max = 0;
         String res = "";
-        String fill = fill(s);
-        int maxLength = 0;
-        for (int i = 1; i < fill.length(); i++) {
-            int len;
-            int left = i - 1;
-            int right = i + 1;
-            while (left >= 0 && right < fill.length()) {
-                if (fill.charAt(left) != fill.charAt(right)) {
-                    break;
-                }
-                left--;
-                right++;
+        for (int i = 0; i < str.length(); i++) {
+            int l = i - 1;
+            int r = i + 1;
+            while (l >= 0 && r < str.length() && str.charAt(l) == str.charAt(r)) {
+                l--;
+                r++;
             }
-            len = right - left - 1;
-            if (len > maxLength) {
-                res = s.substring((left + 1) / 2, (right - 1) / 2);
+            if (r - l > max) {
+                max = r - l;
+                res = s.substring((l + 1) / 2, r / 2);
             }
-            maxLength = Math.max(maxLength, len);
         }
-
         return res;
     }
 
-    private String fill(String s) {
+    private String fillStr(String s, String s1) {
         StringBuilder sb = new StringBuilder();
-        sb.append("#");
+        sb.append(s1);
         for (int i = 0; i < s.length(); i++) {
-            sb.append(s.charAt(i)).append("#");
+            sb.append(s.charAt(i))
+                    .append(s1);
         }
         return sb.toString();
     }
@@ -54,6 +44,6 @@ public class _5_最长回文子串 {
 
     @Test
     public void test() {
-        System.out.println(JSON.toJSONString(longestPalindrome("ab")));
+        System.out.println(JSON.toJSONString(longestPalindrome("cbbd")));
     }
 }

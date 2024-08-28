@@ -15,82 +15,69 @@ import java.util.Set;
  */
 public class _3_无重复字符的最长子串 {
     public int lengthOfLongestSubstring(String s) {
-        if (s.length() <= 1) {
-            return s.length();
-        }
-        Map<Integer, Character> map = new HashMap();
-        int maxLength = 0;
-        int index = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (!map.containsValue(c)) {
-                map.put(i, c);
-                maxLength = Math.max(maxLength, i + 1 - index);
-            }else {
-                map.remove(index);
-                index++;
-                i--;
+        Map<Character, Integer> map = new HashMap<>();
+
+        int max = 0;
+        char[] arr = s.toCharArray();
+        int l = 0;
+        int r = 0;
+        while (r < arr.length) {
+            while (map.containsKey(arr[r])) {
+                map.remove(arr[l]);
+                l++;
             }
+            map.put(arr[r], r);
+            r++;
+            max = Math.max(max, r - l);
         }
-        return maxLength;
+        return max;
     }
 
     public int lengthOfLongestSubstring2(String s) {
-        if (s.length() <= 1) {
+        if (s.length() < 2) {
             return s.length();
         }
-        Map<Integer, Character> map = new HashMap();
-        int maxLength = 0;
-        int index = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (!map.containsValue(c)) {
-                map.put(i, c);
-                maxLength = Math.max(maxLength, i + 1 - index);
-            }else {
-                while (map.get(index) != c) {
-                    map.remove(index++);
-                }
-                map.remove(index++);
+        Set<Character> set = new HashSet<>();
 
-                i--;
+        int max = 0;
+        char[] arr = s.toCharArray();
+        int l = 0;
+        int r = 0;
+        while (r < arr.length) {
+            while (set.contains(arr[r])) {
+                set.remove(arr[l]);
+                l++;
             }
+            set.add(arr[r]);
+            r++;
+            max = Math.max(max, r - l);
         }
-        return maxLength;
+        return max;
     }
+
 
     public int lengthOfLongestSubstring3(String s) {
-        if (s.length() <= 1) {
-            return s.length();
-        }
-        int maxLength = 0;
-        for (int i = 0; i < s.length()-1; i++) {
-            Set<Character> set = new HashSet<>();
-            set.add(s.charAt(i));
-            int len = 0;
-            int j = i+1;
-            boolean flag = false;
-            while ( j < s.length()) {
-                char c = s.charAt(j);
-                if (set.contains(c)) {
-                    len = j - i;
-                    flag = true;
-                    break;
-                }
-                set.add(c);
-                j++;
+        boolean[] flag = new boolean[128];
+        int max = 0;
+        int n = s.length();
+        int l = 0;
+        int r = 0;
+        while (r < n) {
+            int idx = s.charAt(r);
+            while (flag[idx]) {
+                flag[s.charAt(l)] = false;
+                l++;
             }
-            if (!flag) {
-                len = j - i;
-            }
-
-            maxLength = Math.max(maxLength, len);
+            flag[s.charAt(r)] = true;
+            r++;
+            max = Math.max(max, r - l);
         }
-        return maxLength;
+        return max;
     }
+
 
     @Test
     public void test() {
-        System.out.println(lengthOfLongestSubstring3("aa"));
+        System.out.println(lengthOfLongestSubstring3("pwwkew"));
     }
 }

@@ -4,12 +4,12 @@ package com.leetcode.leetcode2024;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * https://leetcode-cn.com/problems/two-sum/
+ *
  * @Author: xiehongyu
  * @Date: 2021/7/20 09:54
  */
@@ -27,6 +27,6 @@ public class _1_两数之和 {
 
     @Test
     public void test() {
-        System.out.println(JSON.toJSONString(twoSum(new int[]{1,2,3,5},7)));
+        System.out.println(JSON.toJSONString(twoSum(new int[]{1, 2, 3, 5}, 7)));
     }
 }
