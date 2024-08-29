@@ -5,6 +5,7 @@ import org.junit.Test;
 
 /**
  * https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/
+ *
  * @author xiehongyu
  * @date 2024/2/23 19:45
  */
@@ -12,25 +13,19 @@ public class _26_删除有序数组中的重复项 {
 
 
     public int removeDuplicates(int[] nums) {
-        if (nums.length == 0) {
-            return 0;
-        }
-        int index = 0;
-        for (int i = 1; i < nums.length; i++) {
-            while (i < nums.length && nums[i] == nums[index]) {
-                i++;
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            while (j < nums.length - 1 && nums[j] == nums[j + 1]) {
+                j++;
             }
-            if (i >= nums.length) {
-                break;
-            }
-            nums[++index] = nums[i];
+            nums[i++] = nums[j];
         }
-        return ++index;
+        return i;
     }
 
 
     @Test
     public void test() {
-        System.out.println(JSON.toJSONString(removeDuplicates(new int[]{1,1,1,2,2,2,2})));
+        System.out.println(JSON.toJSONString(removeDuplicates(new int[]{1, 1, 1, 2, 2, 2, 2})));
     }
 }

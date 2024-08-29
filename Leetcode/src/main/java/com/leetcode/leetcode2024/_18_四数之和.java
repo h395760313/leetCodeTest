@@ -9,63 +9,78 @@ import java.util.List;
 
 /**
  * https://leetcode.cn/problems/4sum/
+ *
  * @author xiehongyu
  * @date 2024/2/20 22:27
  */
 public class _18_四数之和 {
 
     public List<List<Integer>> fourSum(int[] nums, int target) {
-        Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
-        int len = nums.length;
 
-        int i = 0;
-        while (i < len - 3) {
-            while (i <len - 3 && i > 0 && nums[i] == nums[i - 1]) {
-                i++;
+        if (nums.length < 4) {
+            return res;
+        }
+        Arrays.sort(nums);
+        int q = 0;
+        while (q < nums.length - 3) {
+            if (q < nums.length - 3 && q > 0 && nums[q] == nums[q - 1]) {
+                q++;
+                continue;
             }
-            if (i >= len -3 ) {
+            if ((long)nums[q] + nums[q + 1] + nums[q + 2] + nums[q + 3] > target) {
                 break;
             }
-            int j = i + 1;
-            while (j < len - 2) {
-                while (j < len - 2 && j > i + 1 && nums[j] == nums[j - 1]) {
-                    j++;
+            if ((long)nums[q] + nums[nums.length - 1] + nums[nums.length - 2] + nums[nums.length - 3] < target) {
+                q++;
+                continue;
+            }
+            int w = q + 1;
+
+            while (w < nums.length - 2) {
+                if (w > q + 1 && w < nums.length - 2 && nums[w] == nums[w - 1]) {
+                    w++;
+                    continue;
                 }
-                if (j >= len - 2) {
+                if ((long)nums[q] + nums[w] + nums[w + 1] + nums[w + 2] > target) {
                     break;
                 }
-                int k = j + 1;
-                int l = len - 1;
-                while (k < l) {
-                    long sum = nums[i] + nums[j] + nums[k] + nums[l];
-                    if (sum < target) {
-                        k++;
-                    }else if (sum > target) {
-                        l--;
-                    }else {
-                        if (((nums[i] ^ sum) & (nums[j] ^ sum) & (nums[k] ^ sum) & (nums[l] ^ sum)) >= 0) {
-                            res.add(Arrays.asList(nums[i], nums[j], nums[k], nums[l]));
+                if ((long)nums[q] + nums[w] + nums[nums.length - 1] + nums[nums.length - 2] < target) {
+                    w++;
+                    continue;
+                }
+                int e = w + 1;
+                int r = nums.length - 1;
+                while (e < r) {
+                    long sum = nums[q] + nums[w] + nums[e] + nums[r];
+                    if (sum > target) {
+                        r--;
+                    } else if (sum < target) {
+                        e++;
+                    } else {
+                        if (sum == target) {
+                            res.add(Arrays.asList(nums[q], nums[w], nums[e], nums[r]));
                         }
-                        k++;
-                        l--;
-                    }
-                    while (k < l && k > j + 1 && nums[k] == nums[k - 1]) {
-                        k++;
-                    }
-                    while (k < l && l < nums.length - 1 && nums[l] == nums[l + 1]) {
-                        l--;
+                        while (e < r && nums[e] == nums[e + 1]) {
+                            e++;
+                        }
+                        while (e < r && nums[r] == nums[r - 1]) {
+                            r--;
+                        }
+                        e++;
+                        r--;
                     }
                 }
-                j++;
+                w++;
             }
-            i++;
+            q++;
+
         }
         return res;
     }
 
     @Test
     public void test() {
-        System.out.println(JSON.toJSONString(fourSum(new int[]{1000000000,1000000000,1000000000,1000000000},-294967296)));
+        System.out.println(JSON.toJSONString(fourSum(new int[]{1000000000, 1000000000, 1000000000, 1000000000}, -294967296)));
     }
 }

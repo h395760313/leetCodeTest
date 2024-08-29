@@ -14,43 +14,33 @@ public class _16_最接近的三数之和 {
 
     public int threeSumClosest(int[] nums, int target) {
         Arrays.sort(nums);
-        int i = 0;
+        int first = 0;
         int min = Integer.MAX_VALUE;
         int res = 0;
-        while (i < nums.length - 2) {
-            while (i < nums.length - 2 && i > 0 && nums[i] == nums[i - 1]) {
-                i++;
-            }
-            int j = i + 1;
-            int k = nums.length - 1;
-            while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
-                if (Math.abs(sum  - target) < min) {
-                    min = Math.abs(sum  - target);
+        while (first < nums.length - 2) {
+            int second = first + 1;
+            int third = nums.length - 1;
+            while (second < third) {
+                int sum = nums[first] + nums[second] + nums[third];
+                if (Math.abs(sum - target) <= min) {
+                    min = Math.abs(sum - target);
                     res = sum;
                 }
-                min = Math.min(Math.abs(sum  - target), min);
                 if (sum > target) {
-                    k--;
-                    while (j < k && nums[k] == nums[k + 1]) {
-                        k--;
-                    }
-                }else if (sum < target){
-                    j++;
-                    while (j < k && nums[j] == nums[j - 1]) {
-                        j++;
-                    }
+                    third--;
+                }else if (sum < target) {
+                    second++;
                 }else {
                     return sum;
                 }
             }
-            i++;
+            first++;
         }
         return res;
     }
 
     @Test
     public void test() {
-        System.out.println(JSON.toJSONString(threeSumClosest(new int[]{0,1,2},3)));
+        System.out.println(JSON.toJSONString(threeSumClosest(new int[]{-1,2,1,-4},1)));
     }
 }
