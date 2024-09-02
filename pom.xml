@@ -24,6 +24,7 @@
         <module>Leetcode</module>
         <module>DesignPatterns</module>
         <module>Proxy</module>
+        <module>Api</module>
     </modules>
 
 

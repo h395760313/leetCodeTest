@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Leetcode" />
         <module name="DesignPatterns" />
         <module name="Proxy" />
+        <module name="Api" />
+        <module name="Leetcode" />
       </profile>
     </annotationProcessing>
   </component>
